@@ -160,14 +160,14 @@ const sceneTransitionProfiles: Record<string, { duration: number; swap: number; 
   roadmap: { duration: 680, swap: 306, inputHold: 5650, direction: "up" },
   impact: { duration: 720, swap: 324, direction: "center" },
   message: { duration: 680, swap: 306, inputHold: 2650, direction: "right" },
-  "brand-end": { duration: 900, swap: 405, inputHold: 6500, direction: "depth" },
+  "brand-end": { duration: 900, swap: 405, inputHold: 5500, direction: "depth" },
 };
 
 const signatureSceneDurations: Record<string, number> = {
   hero: 4550,
   why: 4250,
   roadmap: 5150,
-  "brand-end": 6000,
+  "brand-end": 4900,
 };
 
 function ParallaxImage({
@@ -1251,7 +1251,6 @@ export default function Home() {
             <div className="ending-object ending-object-browser"><Network /><span>WEB BROWSER</span></div>
             <i className="ending-compression-line" />
             <div className="ending-blackout" />
-            <div className="ending-signature-copy"><p>반복은 시스템이,</p><p>판단은 사람이.</p></div>
           </div>
           <div className="brand-end-logo" aria-label="CONCOST"><img src={manusAsset("concost-logo_747fe330.png")} alt="CONCOST" /><p className="ending-thanks">감사합니다</p></div>
         </section>
