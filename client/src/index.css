@@ -1522,6 +1522,131 @@ img.asset-fallback {
   .presentation-mode #showcase .client-site-frame { padding: 7px 10px; }
 }
 
+/* Page 06 official sites: two primary live-site frames, with client builds reduced to a text ledger. */
+.official-site-grid .client-browser-card {
+  grid-template-columns: minmax(0, 1.38fr) minmax(190px, .62fr);
+  grid-template-rows: 1fr;
+  min-height: 248px;
+}
+.official-site-grid .client-site-frame,
+.official-site-grid .client-card-details {
+  height: 100%;
+  min-height: 0;
+}
+.official-site-grid .client-card-details {
+  border-left: 1px solid rgba(16, 28, 44, .16);
+  border-top: 0;
+}
+.official-site-grid .official-site-description {
+  overflow-wrap: anywhere;
+}
+.client-text-references {
+  align-items: center;
+  border-top: 1px solid rgba(16, 28, 44, .14);
+  display: grid;
+  gap: 0;
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  margin-top: 10px;
+  min-height: 34px;
+  padding-top: 8px;
+}
+.client-text-references > span {
+  color: #008b8b;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  margin-right: 18px;
+  white-space: nowrap;
+}
+.client-text-references a {
+  align-items: baseline;
+  border-left: 1px solid rgba(16, 28, 44, .14);
+  color: #101c2c;
+  display: flex;
+  font-family: "SUIT", sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  gap: 7px;
+  min-width: 0;
+  padding: 1px 12px;
+  white-space: nowrap;
+}
+.client-text-references a small {
+  color: #547075;
+  font-size: 8px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 639px) {
+  .official-site-grid .client-browser-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(170px, 1fr) auto;
+  }
+  .official-site-grid .client-card-details {
+    border-left: 0;
+    border-top: 1px solid rgba(16, 28, 44, .16);
+  }
+  .client-text-references {
+    align-items: start;
+    grid-template-columns: 1fr;
+  }
+  .client-text-references > span { margin-bottom: 5px; }
+  .client-text-references a { border-left: 0; padding: 4px 0; }
+}
+
+@media (min-width: 1024px) {
+  .presentation-mode #showcase .official-site-grid .client-browser-card {
+    grid-template-columns: minmax(0, 1.38fr) minmax(190px, .62fr);
+    grid-template-rows: 1fr;
+    height: 214px;
+    min-height: 214px;
+  }
+  .presentation-mode #showcase .official-site-grid .client-site-frame,
+  .presentation-mode #showcase .official-site-grid .client-card-details {
+    height: 100%;
+    min-height: 0;
+  }
+  .presentation-mode #showcase .official-site-grid .client-card-details {
+    padding: 13px 15px 12px;
+  }
+  .presentation-mode #showcase .official-site-grid .official-site-description {
+    font-size: 10px;
+    line-height: 1.45;
+  }
+  .presentation-mode #showcase .client-text-references { margin-top: 8px; min-height: 30px; padding-top: 7px; }
+}
+
+@media (min-width: 1024px) and (max-width: 1499px) and (max-height: 850px) {
+  .presentation-mode #showcase .official-site-grid .client-browser-card {
+    grid-template-columns: minmax(0, 1.35fr) minmax(180px, .65fr);
+    grid-template-rows: 1fr;
+    height: 160px;
+    min-height: 160px;
+  }
+  .presentation-mode #showcase .official-site-grid .client-card-details { padding: 9px 10px 8px; }
+  .presentation-mode #showcase .official-site-grid .official-site-description { font-size: 8px; line-height: 1.35; }
+  .presentation-mode #showcase .client-text-references { margin-top: 5px; min-height: 23px; padding-top: 4px; }
+  .presentation-mode #showcase .client-text-references > span { font-size: 7px; margin-right: 10px; }
+  .presentation-mode #showcase .client-text-references a { font-size: 8px; gap: 4px; padding: 0 8px; }
+  .presentation-mode #showcase .client-text-references a small { font-size: 7px; }
+}
+
+.official-site-grid .client-browser-card > .client-site-frame {
+  align-self: stretch;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+#showcase .official-site-grid .client-site-frame > img,
+.presentation-mode #showcase .official-site-grid .client-site-frame > img {
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+}
+
 /* COMMON FOUNDATION density: use the full stage height instead of leaving the remaining viewport at the bottom. */
 @media (min-width:1024px) {
   .presentation-mode #foundation .foundation-base {

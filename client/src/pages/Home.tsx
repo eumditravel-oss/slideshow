@@ -93,9 +93,28 @@ const ownedPlatforms = [
 ];
 
 const clientWebsites = [
-  { name: "한강엔지니어링", type: "안전진단 전문기관", image: manusAsset("hangang-client_9e421e31.webp"), href: "https://eumditravel-oss.github.io/website3/" },
-  { name: "선진건설", type: "토건·현장 시공 안내", image: manusAsset("sunjin-client_0ec36a76.webp"), href: "https://eumditravel-oss.github.io/sample_site1/" },
-  { name: "동성건설", type: "토목·건축·외부시설", image: manusAsset("dongseong-client_290b311b.webp"), href: "https://eumditravel-oss.github.io/sample_site2/" },
+  { name: "한강엔지니어링", type: "안전진단 전문기관", href: "https://eumditravel-oss.github.io/website3/" },
+  { name: "선진건설", type: "토건·현장 시공 안내", href: "https://eumditravel-oss.github.io/sample_site1/" },
+  { name: "동성건설", type: "토목·건축·외부시설", href: "https://eumditravel-oss.github.io/sample_site2/" },
+];
+
+const officialWebsites = [
+  {
+    code: "SITE 01",
+    name: "ES 프로그램",
+    type: "물가변동 조정 관리 시스템",
+    description: "Kd 계산·지수 관리·PDF 보고서를 연결하는 건설 계약 물가변동 조정 플랫폼",
+    image: manusAsset("es-program-site.png"),
+    href: "https://es.con-cost.co.kr/",
+  },
+  {
+    code: "SITE 02",
+    name: "CON-COST",
+    type: "건설 견적·수량산출 전문 사이트",
+    description: "수량산출·설계변경·해외 견적·공사비 검토·건설클레임 전문 서비스",
+    image: manusAsset("concost-site.png"),
+    href: "http://www.con-cost.com/",
+  },
 ];
 
 const departments = [
@@ -136,9 +155,8 @@ const presentationImageSources = [
   claimCenterEndFrameSrc,
   manusAsset("gongsabi-platform_642d3556.webp"),
   manusAsset("vietqs-platform_16246514.webp"),
-  manusAsset("hangang-client_9e421e31.webp"),
-  manusAsset("sunjin-client_0ec36a76.webp"),
-  manusAsset("dongseong-client_290b311b.webp"),
+  manusAsset("es-program-site.png"),
+  manusAsset("concost-site.png"),
   manusAsset("devlab-roadmap_a1fcd200.jpg"),
   manusAsset("concost-logo_747fe330.png"),
 ];
@@ -1205,15 +1223,21 @@ export default function Home() {
 
             <div data-cue className="mt-5 border-t border-[#101c2c]/15 pt-4">
               <div className="flex items-end justify-between gap-4">
-                <div><p className="text-[10px] font-extrabold tracking-[0.16em] text-[#547075]">CLIENT WEBSITE BUILD</p><p className="font-display mt-1 text-xl font-extrabold tracking-[-0.045em] text-[#101c2c]">외부 의뢰 웹사이트도 제작합니다.</p></div>
-                <p className="hidden max-w-none whitespace-nowrap text-right text-[12px] leading-5 text-[#547075] sm:block">산업의 언어와 고객 경험을 이해한 뒤, 정보 구조·문의 흐름·브랜드 화면까지 구현합니다.</p>
+                <div><p className="text-[10px] font-extrabold tracking-[0.16em] text-[#547075]">OFFICIAL PROGRAM &amp; CORPORATE SITES</p><p className="font-display mt-1 text-xl font-extrabold tracking-[-0.045em] text-[#101c2c]">ES 프로그램과 CON-COST 공식 사이트</p></div>
+                <p className="hidden max-w-none whitespace-nowrap text-right text-[12px] leading-5 text-[#547075] sm:block">건설 실무의 전문성을 프로그램과 서비스 화면으로 연결합니다.</p>
               </div>
-              <div className="client-website-evidence-grid mt-3 grid gap-3 sm:grid-cols-3">
-                {clientWebsites.map((site, index) => (
+              <div className="client-website-evidence-grid official-site-grid mt-3 grid gap-3 sm:grid-cols-2">
+                {officialWebsites.map((site, index) => (
                   <a key={site.name} href={site.href} target="_blank" rel="noreferrer" aria-disabled={undefined} onClick={(event) => { if (document.documentElement.classList.contains("presentation-mode")) { event.preventDefault(); event.stopPropagation(); } }} onKeyDown={(event) => { if (document.documentElement.classList.contains("presentation-mode") && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); event.stopPropagation(); } }} data-presentation-link data-no-cue className={`client-browser-card client-browser-card-${index + 1} group relative grid min-w-0 overflow-hidden border border-[#101c2c]/15 bg-[#f3f0e9]`}><span aria-hidden="true" className="showcase-case-node showcase-case-node-client">0{index + 3}</span>
-                    <div className="client-site-frame relative overflow-hidden bg-[#101c2c]"><img src={site.image} alt={`${site.name} 웹사이트 화면`} className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" /><span aria-hidden="true" className="client-site-frame-label">SITE EVIDENCE</span></div>
-                    <div className="client-card-details flex min-w-0 flex-col justify-between"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="font-display break-words font-extrabold tracking-[-0.04em] text-[#101c2c]">{site.name}</p><p className="mt-1 break-words font-bold text-[#547075]">{site.type}</p></div><ArrowUpRight size={16} className="mt-0.5 shrink-0 text-[#008b8b]" /></div><p className="client-card-meta text-[9px] font-extrabold tracking-[0.12em] text-[#008b8b]">CLIENT PROJECT · WEBSITE BUILD</p></div>
+                    <div className="client-site-frame relative overflow-hidden bg-[#101c2c]"><img src={site.image} alt={`${site.name} 공식 웹사이트 화면`} className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" /><span aria-hidden="true" className="client-site-frame-label">{site.code} · LIVE SITE</span></div>
+                    <div className="client-card-details official-site-details flex min-w-0 flex-col justify-between"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="font-display break-words font-extrabold tracking-[-0.04em] text-[#101c2c]">{site.name}</p><p className="mt-1 break-words font-bold text-[#547075]">{site.type}</p></div><ArrowUpRight size={16} className="mt-0.5 shrink-0 text-[#008b8b]" /></div><p className="official-site-description mt-2 text-[10px] leading-[1.45] text-[#547075]">{site.description}</p></div>
                   </a>
+                ))}
+              </div>
+              <div className="client-text-references" aria-label="외부 의뢰 웹사이트 제작 사례">
+                <span>CLIENT WEBSITE BUILD</span>
+                {clientWebsites.map((site) => (
+                  <a key={site.name} href={site.href} target="_blank" rel="noreferrer" onClick={(event) => { if (document.documentElement.classList.contains("presentation-mode")) { event.preventDefault(); event.stopPropagation(); } }} onKeyDown={(event) => { if (document.documentElement.classList.contains("presentation-mode") && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); event.stopPropagation(); } }} data-presentation-link data-no-cue>{site.name}<small>{site.type}</small></a>
                 ))}
               </div>
             </div>
