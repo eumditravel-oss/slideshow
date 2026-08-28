@@ -1479,6 +1479,13 @@ body:has(#brand-end.presentation-active) .presentation-guide-rail { display:none
   pointer-events: none;
 }
 
+/* Keep exported builds presentable when Manus-only media was not included. */
+img.asset-fallback {
+  background:
+    radial-gradient(circle at 72% 28%, rgba(42, 190, 184, 0.22), transparent 34%),
+    linear-gradient(145deg, #f4f1e9 0%, #e8f0ed 48%, #dce9e7 100%);
+}
+
 /* Page 05 image placement polish: preserve copy while giving every evidence image a deliberate, centered frame. */
 @media (min-width: 1024px) {
   #showcase .platform-evidence-stage,
