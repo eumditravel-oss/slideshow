@@ -1521,3 +1521,130 @@ img.asset-fallback {
   .presentation-mode #showcase .platform-evidence-stage { padding: 7px 9px; }
   .presentation-mode #showcase .client-site-frame { padding: 7px 10px; }
 }
+
+/* Signature cinematic moments — five deliberate peaks, isolated from the stable scene-transition engine. */
+.signature-opening,
+.signature-why,
+.signature-rc-cad,
+.signature-ending { display:none; }
+
+@media (min-width:1024px) and (prefers-reduced-motion:no-preference) {
+  .presentation-mode .signature-opening,
+  .presentation-mode .signature-why,
+  .presentation-mode .signature-rc-cad,
+  .presentation-mode .signature-ending { display:block; }
+
+  /* 01 / OPENING — CAD → drawing → quantity sheet → operating UI → pull-out. */
+  .presentation-mode .signature-opening { background:#071522; inset:0; overflow:hidden; pointer-events:none; position:absolute; z-index:70; }
+  .presentation-mode .signature-opening-camera { height:100%; inset:0; perspective:1800px; position:absolute; transform-style:preserve-3d; }
+  .signature-opening-crosshair { height:86px; left:50%; position:absolute; top:50%; transform:translate(-50%,-50%); width:86px; z-index:5; }
+  .signature-opening-crosshair i { background:#42d5ce; left:50%; position:absolute; top:50%; transform:translate(-50%,-50%); }
+  .signature-opening-crosshair i:first-child { height:1px; width:86px; }.signature-opening-crosshair i:nth-child(2) { height:86px; width:1px; }
+  .signature-opening-crosshair b { border:1px solid #42d5ce; height:18px; left:50%; position:absolute; top:50%; transform:translate(-50%,-50%); width:18px; }
+  .signature-opening-drawing { height:100%; inset:0; position:absolute; width:100%; }
+  .signature-opening-drawing path { fill:none; stroke:rgba(66,213,206,.72); stroke-dasharray:1; stroke-dashoffset:1; stroke-width:1.25; vector-effect:non-scaling-stroke; }
+  .signature-opening-sheet { background:#eef2ed; border:1px solid rgba(16,28,44,.3); display:grid; grid-template-columns:repeat(6,1fr); height:58%; left:50%; opacity:0; position:absolute; top:50%; transform:translate3d(-50%,-50%,80px) scale(.64); width:68%; }
+  .signature-opening-sheet i { border-bottom:1px solid rgba(16,28,44,.15); border-right:1px solid rgba(16,28,44,.15); color:#456066; font-size:11px; font-style:normal; padding:9px; }
+  .signature-opening-sheet strong { background:#00a6a6; bottom:0; color:#071522; font-size:13px; letter-spacing:.12em; padding:14px 18px; position:absolute; right:0; }
+  .signature-opening-ui { background:#0d2131; border:1px solid rgba(66,213,206,.65); display:grid; gap:14px; grid-template-columns:1.3fr .8fr; height:66%; left:50%; opacity:0; padding:70px 34px 34px; position:absolute; top:50%; transform:translate3d(-50%,-50%,120px) scale(.54); width:78%; }
+  .signature-opening-ui::before { border-bottom:1px solid rgba(66,213,206,.35); color:#42d5ce; content:"SOFTWARE / SHARED OPERATING SYSTEM"; font-size:10px; font-weight:900; left:0; letter-spacing:.16em; padding:20px 28px; position:absolute; right:0; top:0; }
+  .signature-opening-ui > span { color:#f3f0e9; font-family:"SUIT",sans-serif; font-size:clamp(1.4rem,3vw,3.2rem); font-weight:900; grid-column:1/-1; letter-spacing:-.055em; }
+  .signature-opening-ui i { border:1px solid rgba(66,213,206,.28); min-height:70px; }
+  .presentation-mode #hero[data-signature-state="running"] .signature-opening-crosshair { animation:signature-crosshair 880ms cubic-bezier(.23,1,.32,1) both; }
+  .presentation-mode #hero[data-signature-state="running"] .signature-opening-drawing path:first-child { animation:signature-drawing 920ms cubic-bezier(.23,1,.32,1) 520ms both; }
+  .presentation-mode #hero[data-signature-state="running"] .signature-opening-drawing path:nth-child(2) { animation:signature-drawing 920ms cubic-bezier(.23,1,.32,1) 760ms both; }
+  .presentation-mode #hero[data-signature-state="running"] .signature-opening-drawing path:nth-child(3) { animation:signature-drawing 900ms cubic-bezier(.23,1,.32,1) 980ms both; }
+  .presentation-mode #hero[data-signature-state="running"] .signature-opening-sheet { animation:signature-sheet-morph 1180ms cubic-bezier(.77,0,.175,1) 1550ms both; }
+  .presentation-mode #hero[data-signature-state="running"] .signature-opening-ui { animation:signature-ui-morph 1280ms cubic-bezier(.77,0,.175,1) 2420ms both; }
+  .presentation-mode #hero[data-signature-state="running"] .signature-opening-camera { animation:signature-opening-pull 980ms cubic-bezier(.23,1,.32,1) 3400ms both; }
+  .presentation-mode #hero[data-signature-state="running"] .signature-opening { animation:signature-overlay-clear 700ms cubic-bezier(.23,1,.32,1) 3850ms both; }
+  .presentation-mode #hero[data-signature-state="running"] > .grid { animation:signature-interface-reveal 860ms cubic-bezier(.23,1,.32,1) 3600ms both; }
+
+  /* 02 / WHY NOW — one data circulation, then a controlled XYZ fracture. */
+  .presentation-mode .signature-why { background:#0c1724; inset:0; overflow:hidden; pointer-events:none; position:absolute; z-index:25; }
+  .signature-why-camera { height:100%; inset:0; perspective:1800px; position:absolute; transform-style:preserve-3d; }
+  .signature-why-camera > svg { height:100%; inset:0; position:absolute; width:100%; }
+  .why-network-line,.why-network-pulse { fill:none; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; }
+  .why-network-line { stroke:rgba(66,213,206,.42); stroke-width:1.4; }.why-network-pulse { stroke:#42d5ce; stroke-dasharray:.08 .92; stroke-dashoffset:1; stroke-width:3; }
+  .signature-why-object { align-items:center; background:#101f2e; border:1px solid rgba(66,213,206,.55); color:#f3f0e9; display:grid; gap:5px; grid-template-columns:30px 1fr; min-height:82px; padding:14px 16px; position:absolute; transform-style:preserve-3d; width:168px; }
+  .signature-why-object svg { color:#42d5ce; grid-row:1/3; }.signature-why-object b { font-size:11px; letter-spacing:.12em; }.signature-why-object span { color:#9bb2b2; font-size:11px; font-weight:700; }
+  .why-object-excel { left:10%; top:23%; --why-end:translate3d(-80px,-70px,210px) rotateY(9deg); }.why-object-pdf { left:38%; top:14%; --why-end:translate3d(40px,-100px,-260px) rotateY(-12deg); }.why-object-message { right:9%; top:25%; --why-end:translate3d(110px,-42px,130px) rotateY(-8deg); }.why-object-calendar { bottom:20%; left:16%; --why-end:translate3d(-120px,70px,-190px) rotateY(13deg); }.why-object-revision { bottom:13%; left:44%; --why-end:translate3d(12px,100px,250px) rotateY(-7deg); }.why-object-approval { bottom:22%; right:11%; --why-end:translate3d(120px,58px,-230px) rotateY(11deg); }
+  .presentation-mode #why[data-signature-state="running"] .why-network-pulse { animation:signature-network-cycle 1300ms cubic-bezier(.65,0,.35,1) 340ms both; }
+  .presentation-mode #why[data-signature-state="running"] .why-network-main { animation:signature-network-fracture 880ms cubic-bezier(.77,0,.175,1) 1600ms both; transform-origin:center; }
+  .presentation-mode #why[data-signature-state="running"] .signature-why-object { animation:signature-object-fracture 1320ms cubic-bezier(.77,0,.175,1) 1550ms both; }
+  .presentation-mode #why[data-signature-state="running"] .signature-why-camera { animation:signature-why-pull 1200ms cubic-bezier(.23,1,.32,1) 2500ms both; }
+  .presentation-mode #why[data-signature-state="running"] .signature-why { animation:signature-overlay-clear 620ms cubic-bezier(.23,1,.32,1) 3500ms both; }
+  .presentation-mode #why[data-signature-state="running"] > div:not(.signature-why) { animation:signature-interface-reveal 780ms cubic-bezier(.23,1,.32,1) 3400ms both; }
+
+  /* 03 / THREE PRODUCT HERO — giant overlapping walls with an opposing camera roll. */
+  .presentation-mode #foundation .product-camera-rig { inset:0; perspective:2400px; position:absolute; transform:rotateZ(-5deg); transform-origin:center; transform-style:preserve-3d; }
+  .presentation-mode #foundation .product-spatial { height:76%; right:-1%; top:12%; width:76%; }
+  .presentation-mode #foundation .product-spatial > .product-screen { height:clamp(300px,50vh,560px); max-width:none; min-height:0; padding:0; width:56vw; }
+  .presentation-mode #foundation .product-screen-groupware { z-index:1; }.presentation-mode #foundation .product-screen-messenger { z-index:2; }.presentation-mode #foundation .product-screen-claim { z-index:3; }
+  .presentation-mode #foundation .foundation-space-products.cue-visible .product-camera-rig { animation:signature-camera-counter 1900ms cubic-bezier(.77,0,.175,1) both; }
+  .presentation-mode #foundation .foundation-space-products.cue-visible .product-spatial { animation:signature-product-wall 2050ms cubic-bezier(.77,0,.175,1) both !important; }
+
+  /* 04 / RC-CAD — one real drawing build, one automatic quantity register, then hold. */
+  .presentation-mode .signature-rc-cad { background:#071522; color:#f3f0e9; inset:0; overflow:hidden; pointer-events:none; position:absolute; z-index:70; }
+  .signature-rc-crosshair { height:64px; left:13%; position:absolute; top:17%; width:64px; }.signature-rc-crosshair i { background:#42d5ce; left:50%; position:absolute; top:50%; transform:translate(-50%,-50%); }.signature-rc-crosshair i:first-child { height:1px; width:64px; }.signature-rc-crosshair i:last-child { height:64px; width:1px; }
+  .signature-rc-drawing { height:88%; left:3%; position:absolute; top:6%; width:72%; }
+  .signature-rc-drawing path { fill:none; stroke:#42d5ce; stroke-dasharray:1; stroke-dashoffset:1; stroke-width:1.4; vector-effect:non-scaling-stroke; }.signature-rc-drawing .rc-slab { fill:rgba(66,213,206,.08); }.signature-rc-drawing text { fill:#9bb2b2; font-family:"SUIT",sans-serif; font-size:14px; font-weight:800; letter-spacing:.08em; opacity:0; }
+  .signature-rc-sequence { align-items:center; display:flex; gap:13px; left:5%; position:absolute; top:5%; }.signature-rc-sequence span { color:#547075; font-size:9px; font-weight:900; letter-spacing:.13em; }.signature-rc-sequence span + span::before { color:#2f5963; content:"→"; margin-right:13px; }
+  .signature-rc-quantity { border-left:1px solid rgba(66,213,206,.48); padding:26px; position:absolute; right:5%; top:20%; width:24%; }.signature-rc-quantity small { color:#42d5ce; font-size:10px; font-weight:900; letter-spacing:.16em; }.signature-rc-quantity p { border-bottom:1px solid rgba(243,240,233,.16); display:flex; font-size:13px; justify-content:space-between; margin-top:18px; opacity:0; padding-bottom:12px; transform:translateX(24px); }.signature-rc-quantity p span { color:#9bb2b2; }.signature-rc-quantity strong { background:#42d5ce; color:#071522; display:block; font-size:13px; letter-spacing:.1em; margin-top:20px; opacity:0; padding:14px; }
+  .signature-rc-copy { bottom:9%; font-family:"SUIT",sans-serif; left:50%; position:absolute; text-align:center; transform:translateX(-50%); width:80%; }.signature-rc-copy p { font-size:clamp(2.25rem,4vw,4.8rem); font-weight:900; letter-spacing:-.065em; line-height:1.05; opacity:0; }.signature-rc-copy p:last-child { color:#42d5ce; margin-top:12px; }
+  .presentation-mode #roadmap[data-signature-state="running"] .signature-rc-crosshair { animation:signature-rc-crosshair 680ms cubic-bezier(.23,1,.32,1) both; }
+  .presentation-mode #roadmap[data-signature-state="running"] .rc-line { animation:signature-rc-path 620ms cubic-bezier(.23,1,.32,1) 420ms both; }.presentation-mode #roadmap[data-signature-state="running"] .rc-wall { animation:signature-rc-path 680ms cubic-bezier(.23,1,.32,1) 900ms both; }.presentation-mode #roadmap[data-signature-state="running"] .rc-beam { animation:signature-rc-path 620ms cubic-bezier(.23,1,.32,1) 1380ms both; }.presentation-mode #roadmap[data-signature-state="running"] .rc-slab { animation:signature-rc-path 620ms cubic-bezier(.23,1,.32,1) 1820ms both; }.presentation-mode #roadmap[data-signature-state="running"] .rc-label { animation:signature-rc-label 420ms cubic-bezier(.23,1,.32,1) 2260ms both; }.presentation-mode #roadmap[data-signature-state="running"] .rc-dimension { animation:signature-rc-path 620ms cubic-bezier(.23,1,.32,1) 2580ms both; }
+  .presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p { animation:signature-quantity-row 480ms cubic-bezier(.23,1,.32,1) both; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p:nth-of-type(1) { animation-delay:2920ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p:nth-of-type(2) { animation-delay:3100ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p:nth-of-type(3) { animation-delay:3280ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity strong { animation:signature-quantity-total 520ms cubic-bezier(.23,1,.32,1) 3480ms both; }
+  .presentation-mode #roadmap[data-signature-state="running"] .signature-rc-copy p:first-child { animation:signature-copy-rise 500ms cubic-bezier(.23,1,.32,1) 3900ms both; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-copy p:last-child { animation:signature-copy-rise 500ms cubic-bezier(.23,1,.32,1) 4550ms both; }
+
+  /* 05 / ENDING — used work objects converge, compress, blackout, statement, logo, absolute hold. */
+  .presentation-mode .signature-ending { inset:0; overflow:hidden; pointer-events:none; position:absolute; z-index:50; }
+  .ending-object { align-items:center; background:#122434; border:1px solid rgba(66,213,206,.48); color:#dbe6e5; display:flex; gap:12px; left:50%; padding:14px 18px; position:absolute; top:50%; transform:translate(-50%,-50%); width:190px; }.ending-object svg { color:#42d5ce; }.ending-object span { font-size:10px; font-weight:900; letter-spacing:.12em; }
+  .ending-object-excel { --ending-start:translate3d(-72vw,-42vh,0) rotate(-10deg); }.ending-object-cad { --ending-start:translate3d(68vw,-46vh,0) rotate(8deg); }.ending-object-groupware { --ending-start:translate3d(-76vw,4vh,0) rotate(6deg); }.ending-object-message { --ending-start:translate3d(74vw,3vh,0) rotate(-7deg); }.ending-object-claim { --ending-start:translate3d(-58vw,45vh,0) rotate(-5deg); }.ending-object-browser { --ending-start:translate3d(60vw,43vh,0) rotate(7deg); }
+  .ending-compression-line { background:#42d5ce; height:1px; left:50%; opacity:0; position:absolute; top:50%; transform:translate(-50%,-50%) scaleX(.02); width:62vw; }.ending-blackout { background:#000; inset:0; opacity:0; position:absolute; z-index:5; }.ending-signature-copy { font-family:"SUIT",sans-serif; inset:0; position:absolute; text-align:center; z-index:7; }.ending-signature-copy p { color:#f3f0e9; font-size:clamp(2.7rem,5vw,5.8rem); font-weight:900; left:0; letter-spacing:-.075em; opacity:0; position:absolute; right:0; top:53%; }.ending-signature-copy p:last-child { color:#42d5ce; top:64%; }
+  .presentation-mode #brand-end[data-signature-state="running"] .ending-object { animation:signature-ending-converge 1850ms cubic-bezier(.77,0,.175,1) both; }
+  .presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(2) { animation-delay:90ms; }.presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(3) { animation-delay:180ms; }.presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(4) { animation-delay:270ms; }.presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(5) { animation-delay:360ms; }.presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(6) { animation-delay:450ms; }
+  .presentation-mode #brand-end[data-signature-state="running"] .ending-compression-line { animation:signature-ending-compress 700ms cubic-bezier(.77,0,.175,1) 1900ms both; }
+  .presentation-mode #brand-end[data-signature-state="running"] .ending-blackout { animation:signature-ending-blackout 900ms linear 2450ms both; }
+  .presentation-mode #brand-end[data-signature-state="running"] .ending-signature-copy p:first-child { animation:signature-ending-copy 520ms cubic-bezier(.23,1,.32,1) 3220ms both; }.presentation-mode #brand-end[data-signature-state="running"] .ending-signature-copy p:last-child { animation:signature-ending-copy 520ms cubic-bezier(.23,1,.32,1) 4020ms both; }
+  .presentation-mode #brand-end .brand-end-logo { opacity:0; z-index:80; }.presentation-mode #brand-end[data-signature-state="running"] .brand-end-logo { animation:signature-ending-logo 700ms cubic-bezier(.23,1,.32,1) 4580ms both !important; transform:none; }.presentation-mode #brand-end[data-signature-state="running"] .brand-end-logo img { animation:none !important; clip-path:inset(0) !important; transform:none !important; }
+}
+
+@keyframes signature-crosshair { 0% { opacity:0; transform:translate(-50%,-50%) scale(1.8); } 68% { opacity:1; transform:translate(-50%,-50%) scale(.94); } 100% { opacity:1; transform:translate(-50%,-50%) scale(1); } }
+@keyframes signature-drawing { from { opacity:0; stroke-dashoffset:1; } to { opacity:1; stroke-dashoffset:0; } }
+@keyframes signature-sheet-morph { 0% { opacity:0; transform:translate3d(-50%,-50%,80px) scale(.64); } 25% { opacity:1; } 72% { opacity:1; transform:translate3d(-50%,-50%,0) scale(1); } 100% { opacity:0; transform:translate3d(-50%,-50%,120px) scale(1.18); } }
+@keyframes signature-ui-morph { 0% { opacity:0; transform:translate3d(-50%,-50%,-160px) scale(.52); } 26% { opacity:1; } 72% { opacity:1; transform:translate3d(-50%,-50%,14px) scale(1.02); } 100% { opacity:1; transform:translate3d(-50%,-50%,0) scale(1); } }
+@keyframes signature-opening-pull { from { transform:translateZ(0) scale(1); } to { transform:translateZ(-520px) scale(.82); } }
+@keyframes signature-overlay-clear { from { opacity:1; } to { opacity:0; visibility:hidden; } }
+@keyframes signature-interface-reveal { from { opacity:0; transform:scale(1.045); } to { opacity:1; transform:scale(1); } }
+@keyframes signature-network-cycle { 0% { opacity:0; stroke-dashoffset:1; } 14% { opacity:1; } 82% { opacity:1; } 100% { opacity:0; stroke-dashoffset:0; } }
+@keyframes signature-network-fracture { 0% { opacity:1; transform:scale(1); } 28% { opacity:1; transform:scale(1.02); } 100% { opacity:.12; transform:scale(.72); } }
+@keyframes signature-object-fracture { 0% { opacity:.9; transform:translate3d(0,0,0) rotateY(0); } 18% { opacity:1; transform:translate3d(0,0,22px) rotateY(0); } 100% { opacity:1; transform:var(--why-end); } }
+@keyframes signature-why-pull { from { transform:translateZ(0) scale(1); } to { transform:translateZ(-720px) scale(.7); } }
+@keyframes signature-camera-counter { 0% { transform:rotateZ(0deg) scale(1.08); } 38% { transform:rotateZ(-5.8deg) scale(.96); } 82% { transform:rotateZ(-4.8deg) scale(1.006); } 100% { transform:rotateZ(-5deg) scale(1); } }
+@keyframes signature-product-wall { 0% { opacity:.42; transform:perspective(2400px) translate3d(12%,0,260px) rotateZ(0deg) rotateY(-6deg) scale(1.16); } 48% { opacity:1; transform:perspective(2400px) translate3d(0,0,-50px) rotateZ(26deg) rotateY(-4deg) scale(.96); } 82% { transform:perspective(2400px) translate3d(0,0,6px) rotateZ(24.5deg) rotateY(-4deg) scale(1.008); } 100% { opacity:1; transform:perspective(2400px) translate3d(0,0,0) rotateZ(25deg) rotateY(-4deg) scale(1); } }
+@keyframes signature-rc-crosshair { 0% { opacity:0; transform:translate3d(-70px,48px,0) scale(1.5); } 70% { opacity:1; transform:translate3d(3px,-2px,0) scale(.96); } 100% { opacity:1; transform:none; } }
+@keyframes signature-rc-path { from { stroke-dashoffset:1; } to { stroke-dashoffset:0; } }
+@keyframes signature-rc-label { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@keyframes signature-quantity-row { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:none; } }
+@keyframes signature-quantity-total { from { opacity:0; transform:scaleX(.3); transform-origin:right; } to { opacity:1; transform:scaleX(1); transform-origin:right; } }
+@keyframes signature-copy-rise { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+@keyframes signature-ending-converge { 0% { opacity:0; transform:var(--ending-start) scale(.82); } 20% { opacity:1; } 78% { opacity:1; transform:translate3d(-50%,-50%,0) scale(1); } 100% { opacity:0; transform:translate3d(-50%,-50%,0) scaleX(.02) scaleY(.15); } }
+@keyframes signature-ending-compress { 0% { opacity:0; transform:translate(-50%,-50%) scaleX(.02); } 28% { opacity:1; transform:translate(-50%,-50%) scaleX(1); } 76% { opacity:1; transform:translate(-50%,-50%) scaleX(.12); } 100% { opacity:0; transform:translate(-50%,-50%) scaleX(.12); } }
+@keyframes signature-ending-blackout { 0% { opacity:0; } 12% { opacity:1; } 68% { opacity:1; } 100% { opacity:0; } }
+@keyframes signature-ending-copy { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+@keyframes signature-ending-logo { from { opacity:0; transform:translateY(-68px) scale(.94); } to { opacity:1; transform:translateY(-104px) scale(1); } }
+
+@media (min-width:1024px) and (prefers-reduced-motion:reduce) {
+  .presentation-mode .signature-opening,
+  .presentation-mode .signature-why { display:none; }
+  .presentation-mode .signature-rc-cad,
+  .presentation-mode .signature-ending { display:block; }
+  .presentation-mode .signature-rc-drawing path { stroke-dashoffset:0; }
+  .presentation-mode .signature-rc-drawing text,
+  .presentation-mode .signature-rc-quantity p,
+  .presentation-mode .signature-rc-quantity strong,
+  .presentation-mode .signature-rc-copy p,
+  .presentation-mode #brand-end .brand-end-logo { opacity:1; transform:none; }
+  .presentation-mode .signature-ending { display:none; }
+}

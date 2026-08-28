@@ -151,16 +151,23 @@ const presentationStageTones: Record<string, string> = {
 type StageTransitionDirection = "left" | "right" | "up" | "down" | "center" | "depth";
 
 const sceneTransitionProfiles: Record<string, { duration: number; swap: number; inputHold?: number; direction: StageTransitionDirection }> = {
-  hero: { duration: 760, swap: 342, direction: "center" },
-  why: { duration: 680, swap: 306, direction: "left" },
+  hero: { duration: 760, swap: 342, inputHold: 5100, direction: "center" },
+  why: { duration: 680, swap: 306, inputHold: 4750, direction: "left" },
   build: { duration: 680, swap: 306, direction: "right" },
   work: { duration: 760, swap: 342, direction: "down" },
   foundation: { duration: 760, swap: 342, direction: "center" },
   showcase: { duration: 700, swap: 316, direction: "right" },
-  roadmap: { duration: 680, swap: 306, direction: "up" },
+  roadmap: { duration: 680, swap: 306, inputHold: 5650, direction: "up" },
   impact: { duration: 720, swap: 324, direction: "center" },
   message: { duration: 680, swap: 306, inputHold: 2650, direction: "right" },
-  "brand-end": { duration: 900, swap: 405, inputHold: 2100, direction: "depth" },
+  "brand-end": { duration: 900, swap: 405, inputHold: 5900, direction: "depth" },
+};
+
+const signatureSceneDurations: Record<string, number> = {
+  hero: 4550,
+  why: 4250,
+  roadmap: 5150,
+  "brand-end": 5350,
 };
 
 function ParallaxImage({
@@ -205,6 +212,7 @@ function PresentationControls() {
   const foundationTransitionTimer = useRef<number | null>(null);
   const foundationCueSwapTimer = useRef<number | null>(null);
   const claimPlaybackTimer = useRef<number | null>(null);
+  const signatureLockTimer = useRef<number | null>(null);
 
   const goTo = (index: number) => {
     cueRef.current = 0;
@@ -331,7 +339,7 @@ function PresentationControls() {
       if (isFoundationTakeover) {
         const foundation = document.getElementById("foundation");
         const currentCueElement = getCueElements()[currentCue - 1];
-        const cueProfile = isVisionTakeover ? { duration: 1080, swap: 352, lock: 4200 } : isProductsTakeover ? { duration: 1020, swap: 326, lock: 1980 } : isClaimTakeover ? { duration: 980, swap: 314, lock: 1110 } : { duration: 920, swap: 294, lock: 1460 };
+        const cueProfile = isVisionTakeover ? { duration: 1080, swap: 352, lock: 4200 } : isProductsTakeover ? { duration: 1020, swap: 326, lock: 2850 } : isClaimTakeover ? { duration: 980, swap: 314, lock: 1110 } : { duration: 920, swap: 294, lock: 1460 };
         cinematicInputLocked.current = true;
         foundation?.classList.add("foundation-cue-transitioning");
         foundation?.style.setProperty("--foundation-cue-duration", `${cueProfile.duration}ms`);
@@ -568,6 +576,36 @@ function PresentationControls() {
   }, [assetsReady]);
 
   useEffect(() => {
+    document.querySelectorAll<HTMLElement>("[data-signature-scene]").forEach((scene) => {
+      scene.dataset.signatureState = "idle";
+      scene.classList.remove("signature-hold");
+    });
+    if (signatureLockTimer.current) window.clearTimeout(signatureLockTimer.current);
+    signatureLockTimer.current = null;
+    if (!isPresentation || !assetsReady) return;
+
+    const activeSceneId = presentationScenes[active][0];
+    const duration = signatureSceneDurations[activeSceneId];
+    const scene = document.getElementById(activeSceneId);
+    if (!duration || !scene) return;
+
+    cinematicInputLocked.current = true;
+    scene.dataset.signatureState = "idle";
+    void scene.offsetWidth;
+    scene.dataset.signatureState = "running";
+    signatureLockTimer.current = window.setTimeout(() => {
+      scene.classList.add("signature-hold");
+      cinematicInputLocked.current = false;
+      signatureLockTimer.current = null;
+    }, duration);
+
+    return () => {
+      if (signatureLockTimer.current) window.clearTimeout(signatureLockTimer.current);
+      signatureLockTimer.current = null;
+    };
+  }, [active, assetsReady, isPresentation]);
+
+  useEffect(() => {
     const activeSceneId = presentationScenes[active][0];
     if (!isPresentation) {
       document.querySelectorAll<HTMLElement>(".presentation-scene").forEach((scene) => {
@@ -656,21 +694,20 @@ function PresentationControls() {
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (target?.closest("input, textarea, select, button, a")) return;
-      if (["ArrowDown", "PageDown", " ", "Enter"].includes(event.key)) {
+      if (event.code === "Space") {
         event.preventDefault();
         if (isPresentation) advanceCue();
         else goTo(Math.min(active + 1, presentationScenes.length - 1));
       }
-      if (["ArrowUp", "PageUp"].includes(event.key)) {
+      if (!isPresentation && ["ArrowUp", "PageUp"].includes(event.key)) {
         event.preventDefault();
-        if (isPresentation) retreatCue();
-        else goTo(Math.max(active - 1, 0));
+        goTo(Math.max(active - 1, 0));
       }
-      if (event.key === "Home") {
+      if (!isPresentation && event.key === "Home") {
         event.preventDefault();
         goTo(0);
       }
-      if (event.key === "End") {
+      if (!isPresentation && event.key === "End") {
         event.preventDefault();
         goTo(presentationScenes.length - 1);
       }
@@ -683,10 +720,9 @@ function PresentationControls() {
     const canvas = document.querySelector(".presentation-canvas");
     if (!canvas) return;
     const onCanvasClick = (event: Event) => {
-      if (!isPresentation) return;
+      if (isPresentation) return;
       const target = event.target as HTMLElement | null;
       if (target?.closest("a, button, input, textarea, select, [data-no-cue]")) return;
-      advanceCue();
     };
     canvas.addEventListener("click", onCanvasClick);
     return () => canvas.removeEventListener("click", onCanvasClick);
@@ -697,15 +733,17 @@ function PresentationControls() {
     if (!canvas) return;
     const onWheel = (event: WheelEvent) => {
       if (window.innerWidth < 1024 || Math.abs(event.deltaY) < 8) return;
+      if (isPresentation) {
+        event.preventDefault();
+        return;
+      }
       event.preventDefault();
       if (wheelLocked.current) return;
       wheelLocked.current = true;
       if (event.deltaY > 0) {
-        if (isPresentation) advanceCue();
-        else goTo(Math.min(active + 1, presentationScenes.length - 1));
+        goTo(Math.min(active + 1, presentationScenes.length - 1));
       } else {
-        if (isPresentation) retreatCue();
-        else goTo(Math.max(active - 1, 0));
+        goTo(Math.max(active - 1, 0));
       }
       window.setTimeout(() => { wheelLocked.current = false; }, 760);
     };
@@ -829,7 +867,24 @@ export default function Home() {
           <span className="absolute top-[79%] -left-[5px] h-2 w-2 bg-[#00a6a6]" />
         </div>
         <div aria-hidden="true" className="presentation-transition-surface" />
-        <section id="hero" className="presentation-scene relative mx-auto max-w-[1440px] border-x border-[#101c2c]/10 lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-labelledby="hero-title">
+        <section id="hero" data-signature-scene className="presentation-scene relative mx-auto max-w-[1440px] border-x border-[#101c2c]/10 lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-labelledby="hero-title">
+          <div aria-hidden="true" className="signature-opening">
+            <div className="signature-opening-camera">
+              <div className="signature-opening-crosshair"><i /><i /><b /></div>
+              <svg className="signature-opening-drawing" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+                <path pathLength="1" d="M105 150H1095M105 350H1095M105 550H1095M210 90V610M470 90V610M760 90V610M1010 90V610" />
+                <path pathLength="1" d="M210 150L470 350L760 150L1010 350L760 550L470 350L210 550" />
+                <path pathLength="1" d="M310 246H650V470H910V260H650V150" />
+              </svg>
+              <div className="signature-opening-sheet">
+                {Array.from({ length: 30 }).map((_, index) => <i key={index}>{index % 7 === 0 ? (1240 + index * 37).toLocaleString() : ""}</i>)}
+                <strong>QTY / 48,620</strong>
+              </div>
+              <div className="signature-opening-ui">
+                <span>CONCOST / OPERATING GRID</span><i /><i /><i /><i /><i /><i />
+              </div>
+            </div>
+          </div>
           <div className="grid min-h-[690px] lg:min-h-[calc(100vh-74px)] lg:grid-cols-[1.03fr_.97fr]">
             <div className="relative flex flex-col justify-between border-b border-[#101c2c]/10 px-5 pb-8 pt-12 sm:px-8 lg:border-b-0 lg:border-r lg:px-12 lg:pb-12 lg:pt-16">
               <div className="absolute inset-x-0 top-0 h-1 bg-[#00a6a6]" />
@@ -881,7 +936,21 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="why" className="presentation-scene border-y border-[#101c2c] bg-[#101c2c] text-[#f3f0e9] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-labelledby="why-title">
+        <section id="why" data-signature-scene className="presentation-scene border-y border-[#101c2c] bg-[#101c2c] text-[#f3f0e9] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-labelledby="why-title">
+          <div aria-hidden="true" className="signature-why">
+            <div className="signature-why-camera">
+              <svg viewBox="0 0 1200 700" preserveAspectRatio="none">
+                <path className="why-network-line why-network-main" pathLength="1" d="M100 350H1100M210 350V160H520V350M520 350V545H835V350M835 350V170H1030" />
+                <path className="why-network-pulse" pathLength="1" d="M100 350H1100M210 350V160H520V350M520 350V545H835V350M835 350V170H1030" />
+              </svg>
+              <div className="signature-why-object why-object-excel"><Grid3X3 /><b>EXCEL</b><span>수량 데이터</span></div>
+              <div className="signature-why-object why-object-pdf"><FileText /><b>PDF</b><span>납품 문서</span></div>
+              <div className="signature-why-object why-object-message"><MessageSquareText /><b>MESSENGER</b><span>대화 기록</span></div>
+              <div className="signature-why-object why-object-calendar"><Clock3 /><b>CALENDAR</b><span>일정</span></div>
+              <div className="signature-why-object why-object-revision"><Route /><b>REVISION</b><span>수정 이력</span></div>
+              <div className="signature-why-object why-object-approval"><Check /><b>APPROVAL</b><span>승인</span></div>
+            </div>
+          </div>
           <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
             <div className="grid gap-14 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
               <div>
@@ -910,7 +979,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <p data-cue className="why-problem-copy scene-support-copy mt-20 border-l-2 border-[#42d5ce] pl-5 text-xl font-bold leading-8 sm:text-2xl">
+            <p className="why-problem-copy scene-support-copy mt-20 border-l-2 border-[#42d5ce] pl-5 text-xl font-bold leading-8 sm:text-2xl">
               업무는 연결되어 있지만, <span className="text-[#42d5ce]">도구와 데이터는 나뉘어 있었습니다.</span>
             </p>
           </div>
@@ -1032,7 +1101,7 @@ export default function Home() {
           <div data-cue className="foundation-space foundation-space-groupware"><div className="foundation-space-copy"><p>01 — GROUPWARE</p><h3>업무의 흐름을<br />한 곳에서.</h3><span>프로젝트 · 업무 · 일정 · 승인 · 변경 이력</span></div><div className="foundation-app-frame"><img src={manusAsset("groupware-board_45f13c16.png")} alt="CONCOST 그룹웨어 프로젝트 보드" className="groupware-board-screen" /><div aria-hidden="true" className="continuous-data-line data-line-project" /></div></div>
           <div data-cue className="foundation-space foundation-space-messenger"><div className="foundation-space-copy"><p>02 — MESSENGER</p><h3><span className="block whitespace-nowrap">대화에서 업무로,</span><span className="block whitespace-nowrap">메신저가 업무와 이어집니다.</span></h3><span>프로젝트별 대화 · 업무 생성 · 일정 변경 · 파일 · 승인 알림</span></div><div className="messenger-stage"><img src={manusAsset("messenger-ui_25d14687.png")} alt="CON-COST 사내 메신저 화면" className="messenger-product-screen" /><div aria-hidden="true" className="continuous-data-line data-line-message" /></div></div>
           <div data-cue className="foundation-space foundation-space-claim"><div className="foundation-space-copy"><p>03 — CLAIM CENTER</p><h3>사건 · 쟁점 · 증거 · 기한을<br />하나의 체계로.</h3><span>건설 클레임 업무 전용 독립 시스템</span></div><div className="claim-cinematic-stage"><img src={claimCenterEndFrameSrc} alt="CONCOST Claim Center Studio 제품 비전 최종 화면" className="claim-endframe-screen" />{claimCenterVideoSrc && <video className="claim-cinematic-video" src={claimCenterVideoSrc} poster={claimCenterEndFrameSrc} muted playsInline preload="auto" onEnded={(event) => { const foundation = event.currentTarget.closest("#foundation"); foundation?.classList.remove("claim-video-playing"); foundation?.classList.add("claim-video-settled"); }} onError={(event) => { const foundation = event.currentTarget.closest("#foundation"); foundation?.classList.remove("claim-video-playing"); foundation?.classList.add("claim-video-settled"); }} />}<div aria-hidden="true" className="claim-video-progress"><i /></div><div aria-hidden="true" className="continuous-data-line data-line-claim" /></div></div>
-          <div data-cue className="foundation-space foundation-space-products"><div className="foundation-space-copy"><p>THREE PRODUCT VIEW</p><h3><span>세 개의 시스템,</span><span>하나의 업무 흐름.</span></h3></div><div className="product-spatial"><div className="product-screen product-screen-groupware"><img src={manusAsset("groupware-board_45f13c16.png")} alt="Groupware 제품 화면" className="product-screen-shot" /></div><div className="product-screen product-screen-messenger"><img src={manusAsset("messenger-ui_25d14687.png")} alt="Messenger 제품 화면" className="product-screen-shot" /></div><div className="product-screen product-screen-claim"><img src={claimCenterEndFrameSrc} alt="Claim Center 제품 비전 최종 화면" className="product-screen-shot" /></div><div aria-hidden="true" className="product-link product-link-one" /><div aria-hidden="true" className="product-link product-link-two" /><div aria-hidden="true" className="product-link product-link-three" /><div aria-hidden="true" className="continuous-data-line data-line-products" /></div></div>
+          <div data-cue className="foundation-space foundation-space-products"><div className="foundation-space-copy"><p>THREE PRODUCT VIEW</p><h3><span>세 개의 시스템,</span><span>하나의 업무 흐름.</span></h3></div><div className="product-camera-rig"><div className="product-spatial"><div className="product-screen product-screen-groupware"><img src={manusAsset("groupware-board_45f13c16.png")} alt="Groupware 제품 화면" className="product-screen-shot" /></div><div className="product-screen product-screen-messenger"><img src={manusAsset("messenger-ui_25d14687.png")} alt="Messenger 제품 화면" className="product-screen-shot" /></div><div className="product-screen product-screen-claim"><img src={claimCenterEndFrameSrc} alt="Claim Center 제품 비전 최종 화면" className="product-screen-shot" /></div><div aria-hidden="true" className="product-link product-link-one" /><div aria-hidden="true" className="product-link product-link-two" /><div aria-hidden="true" className="product-link product-link-three" /><div aria-hidden="true" className="continuous-data-line data-line-products" /></div></div></div>
           <div data-cue className="foundation-space foundation-space-vision"><div className="foundation-space-copy"><p>LONG-TERM PRODUCT PLAN</p><h3><span className="vision-main-line vision-tone-teal">우리 업무에 맞추고</span><span className="vision-main-line vision-tone-cyan">불편은 줄이고</span><span className="vision-main-line vision-tone-gold">필요한 시스템은</span><span className="vision-main-line vision-tone-gold">우리가 직접 만듭니다.</span></h3><strong>GROUPWARE · MESSENGER · CLAIM CENTER</strong><em>업무 친화성과 사용자의 불편 최소화를 최우선으로 하는 자체개발 시스템</em></div><div aria-hidden="true" className="vision-product-echo"><div><img src={manusAsset("groupware-board_45f13c16.png")} alt="" /><small>GROUPWARE</small><i /></div><div><img src={manusAsset("messenger-ui_25d14687.png")} alt="" /><small>MESSENGER</small><i /></div><div><img src={claimCenterEndFrameSrc} alt="" /><small>CLAIM CENTER</small><i /></div><span className="vision-link vision-link-one" /><span className="vision-link vision-link-two" /><span className="vision-link vision-link-three" /><span className="continuous-data-line data-line-exit" /></div></div>
         </section>
 
@@ -1090,7 +1159,24 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="roadmap" className="presentation-scene mx-auto max-w-[1440px] border-x border-[#101c2c]/10 px-5 py-20 sm:px-8 lg:min-h-[calc(100vh-74px)] lg:snap-start lg:px-12 lg:py-20" aria-labelledby="roadmap-title">
+        <section id="roadmap" data-signature-scene className="presentation-scene mx-auto max-w-[1440px] border-x border-[#101c2c]/10 px-5 py-20 sm:px-8 lg:min-h-[calc(100vh-74px)] lg:snap-start lg:px-12 lg:py-20" aria-labelledby="roadmap-title">
+          <div aria-hidden="true" className="signature-rc-cad">
+            <div className="signature-rc-crosshair"><i /><i /></div>
+            <svg className="signature-rc-drawing" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet">
+              <path className="rc-line" pathLength="1" d="M115 128H790M115 555H790" />
+              <path className="rc-wall" pathLength="1" d="M170 180H735V510H170ZM235 242H670V450H235Z" />
+              <path className="rc-beam" pathLength="1" d="M235 330H670M450 242V450" />
+              <path className="rc-slab" pathLength="1" d="M250 260H435V315H250ZM465 345H650V430H465Z" />
+              <path className="rc-dimension" pathLength="1" d="M170 130V108M735 130V108M170 116H735M158 180H135M158 510H135M145 180V510" />
+              <text className="rc-label rc-label-one" x="270" y="292">SLAB S1</text>
+              <text className="rc-label rc-label-two" x="492" y="390">BEAM B2</text>
+              <text className="rc-label rc-label-three" x="410" y="102">5,650</text>
+              <text className="rc-label rc-label-four" x="105" y="355">3,300</text>
+            </svg>
+            <div className="signature-rc-sequence"><span>LINE</span><span>WALL</span><span>BEAM</span><span>SLAB</span><span>LABEL</span><span>DIMENSION</span><span>QUANTITY</span></div>
+            <div className="signature-rc-quantity"><small>AUTO QUANTITY</small><p><span>WALL</span><b>128.40 m²</b></p><p><span>BEAM</span><b>42.80 m</b></p><p><span>SLAB</span><b>86.25 m²</b></p><strong>TOTAL / 257.45</strong></div>
+            <div className="signature-rc-copy"><p>반복 명령은 프로그램이</p><p>검토와 판단은 사람이</p></div>
+          </div>
           <div className="grid gap-12 lg:grid-cols-[1.04fr_.96fr] lg:items-start">
             <div>
               <SectionKicker number="06" label="FROM CONNECTION TO INTELLIGENCE" />
@@ -1155,7 +1241,18 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="brand-end" className="presentation-scene brand-end-scene relative grid overflow-hidden bg-[#0c1724] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-label="CONCOST 브랜드 엔드카드">
+        <section id="brand-end" data-signature-scene className="presentation-scene brand-end-scene relative grid overflow-hidden bg-[#0c1724] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-label="CONCOST 브랜드 엔드카드">
+          <div aria-hidden="true" className="signature-ending">
+            <div className="ending-object ending-object-excel"><Grid3X3 /><span>EXCEL CELL</span></div>
+            <div className="ending-object ending-object-cad"><Route /><span>CAD LINE</span></div>
+            <div className="ending-object ending-object-groupware"><FolderKanban /><span>GROUPWARE</span></div>
+            <div className="ending-object ending-object-message"><MessageSquareText /><span>MESSENGER</span></div>
+            <div className="ending-object ending-object-claim"><FileText /><span>CLAIM</span></div>
+            <div className="ending-object ending-object-browser"><Network /><span>WEB BROWSER</span></div>
+            <i className="ending-compression-line" />
+            <div className="ending-blackout" />
+            <div className="ending-signature-copy"><p>반복은 시스템이,</p><p>판단은 사람이.</p></div>
+          </div>
           <div className="brand-end-logo" aria-label="CONCOST"><img src={manusAsset("concost-logo_747fe330.png")} alt="CONCOST" /></div>
         </section>
       </main>
