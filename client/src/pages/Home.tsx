@@ -23,9 +23,12 @@ import {
   X,
 } from "lucide-react";
 
+const manusAsset = (fileName: string) =>
+  `${import.meta.env.BASE_URL}manus-storage/${fileName}`;
+
 const flowSteps = ["베트남 산출", "한국 검토", "내역 작성·납품", "건설사 질의·대응"];
-const claimCenterEndFrameSrc = "/manus-storage/CONCOST_Claim_Center_EndFrame_aa68c5a5.png";
-const claimCenterVideoSrc = "/manus-storage/CONCOST_Claim_Center_Studio_Cinematic_v2_72eac200.mp4";
+const claimCenterEndFrameSrc = manusAsset("CONCOST_Claim_Center_EndFrame_aa68c5a5.png");
+const claimCenterVideoSrc = manusAsset("CONCOST_Claim_Center_Studio_Cinematic_v2_72eac200.mp4");
 
 const dailyImprovements = [
   {
@@ -74,7 +77,7 @@ const ownedPlatforms = [
     description: "공사비 검색부터 내역서 작성·교육·건설 장터까지, 견적 실무의 정보를 하나의 서비스 흐름으로 연결합니다.",
     tags: ["공사비 검색", "내역서 작성", "실무 교육"],
     workflow: [["FIELD INPUT", "건설 실무 정보"], ["SYSTEMIZED", "검색 · 내역서 작성"], ["ORG. OUTPUT", "견적 업무 흐름"]],
-    image: "/manus-storage/gongsabi-platform_642d3556.webp",
+    image: manusAsset("gongsabi-platform_642d3556.webp"),
     href: "https://eumditravel-oss.github.io/gongsabi.com/",
   },
   {
@@ -84,15 +87,15 @@ const ownedPlatforms = [
     description: "수량산출·공사비 검토·설계변경 정산을 바탕으로, 견적 전문성과 해외 프로젝트 실행을 연결합니다.",
     tags: ["Quantity Take-off", "BOQ / WBS", "구조 BIM"],
     workflow: [["FIELD INPUT", "베트남 산출 자료"], ["SYSTEMIZED", "수량 · BOQ 정리"], ["ORG. OUTPUT", "검토 · 프로젝트 실행"]],
-    image: "/manus-storage/vietqs-platform_16246514.webp",
+    image: manusAsset("vietqs-platform_16246514.webp"),
     href: "https://eumditravel-oss.github.io/VietQS/",
   },
 ];
 
 const clientWebsites = [
-  { name: "한강엔지니어링", type: "안전진단 전문기관", image: "/manus-storage/hangang-client_9e421e31.webp", href: "https://eumditravel-oss.github.io/website3/" },
-  { name: "선진건설", type: "토건·현장 시공 안내", image: "/manus-storage/sunjin-client_0ec36a76.webp", href: "https://eumditravel-oss.github.io/sample_site1/" },
-  { name: "동성건설", type: "토목·건축·외부시설", image: "/manus-storage/dongseong-client_290b311b.webp", href: "https://eumditravel-oss.github.io/sample_site2/" },
+  { name: "한강엔지니어링", type: "안전진단 전문기관", image: manusAsset("hangang-client_9e421e31.webp"), href: "https://eumditravel-oss.github.io/website3/" },
+  { name: "선진건설", type: "토건·현장 시공 안내", image: manusAsset("sunjin-client_0ec36a76.webp"), href: "https://eumditravel-oss.github.io/sample_site1/" },
+  { name: "동성건설", type: "토목·건축·외부시설", image: manusAsset("dongseong-client_290b311b.webp"), href: "https://eumditravel-oss.github.io/sample_site2/" },
 ];
 
 const departments = [
@@ -126,18 +129,18 @@ const presentationScenes = [
 ];
 
 const presentationImageSources = [
-  "/manus-storage/devlab-hero-operations_59460b74.jpg",
-  "/manus-storage/groupware-dashboard_c4f7d7ee.png",
-  "/manus-storage/groupware-board_45f13c16.png",
-  "/manus-storage/messenger-ui_25d14687.png",
+  manusAsset("devlab-hero-operations_59460b74.jpg"),
+  manusAsset("groupware-dashboard_c4f7d7ee.png"),
+  manusAsset("groupware-board_45f13c16.png"),
+  manusAsset("messenger-ui_25d14687.png"),
   claimCenterEndFrameSrc,
-  "/manus-storage/gongsabi-platform_642d3556.webp",
-  "/manus-storage/vietqs-platform_16246514.webp",
-  "/manus-storage/hangang-client_9e421e31.webp",
-  "/manus-storage/sunjin-client_0ec36a76.webp",
-  "/manus-storage/dongseong-client_290b311b.webp",
-  "/manus-storage/devlab-roadmap_a1fcd200.jpg",
-  "/manus-storage/concost-logo_747fe330.png",
+  manusAsset("gongsabi-platform_642d3556.webp"),
+  manusAsset("vietqs-platform_16246514.webp"),
+  manusAsset("hangang-client_9e421e31.webp"),
+  manusAsset("sunjin-client_0ec36a76.webp"),
+  manusAsset("dongseong-client_290b311b.webp"),
+  manusAsset("devlab-roadmap_a1fcd200.jpg"),
+  manusAsset("concost-logo_747fe330.png"),
 ];
 
 const presentationStageTones: Record<string, string> = {
@@ -777,7 +780,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-[#101c2c]/10 bg-[#f3f0e9]/95 backdrop-blur-md">
         <div className="mx-auto flex h-[74px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
           <a href="#hero" className="group flex items-center gap-3" aria-label="첫 화면으로 이동" onClick={(event) => { closeMenu(); scrollToScene(event, "hero"); }}>
-            <img src="/manus-storage/devlab-logo_ede2dbc7.png" alt="개발팀 연결 프레임 로고" className="h-11 w-11 object-contain transition-transform duration-200 group-hover:-rotate-6" />
+            <img src={manusAsset("devlab-logo_ede2dbc7.png")} alt="개발팀 연결 프레임 로고" className="h-11 w-11 object-contain transition-transform duration-200 group-hover:-rotate-6" />
             <div className="leading-none">
               <div className="flex items-center gap-2">
                 <p className="font-display text-[15px] font-extrabold tracking-[-0.05em]">DEVELOPMENT</p>
@@ -856,7 +859,7 @@ export default function Home() {
             </div>
 
             <div className="relative min-h-[390px] overflow-hidden bg-[#e6e6dc] lg:min-h-0">
-              <ParallaxImage src="/manus-storage/devlab-hero-operations_59460b74.jpg" alt="업무 흐름을 설계도처럼 표현한 추상 시각물" className="h-full w-full object-cover object-center" intensity={1.25} />
+              <ParallaxImage src={manusAsset("devlab-hero-operations_59460b74.jpg")} alt="업무 흐름을 설계도처럼 표현한 추상 시각물" className="h-full w-full object-cover object-center" intensity={1.25} />
               <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#f3f0e9]/40" />
               <div aria-hidden="true" className="hero-cad-overlay pointer-events-none absolute inset-0 z-[1] opacity-80">
                 <span className="absolute left-[11%] top-[19%] h-[25%] w-[31%] border-l border-t border-[#00a6a6]/35" />
@@ -1019,18 +1022,18 @@ export default function Home() {
               <div className="groupware-sequence mt-9" data-cue><span>MESSAGE</span><i /><span>CALENDAR</span><i /><span>REVIEW</span><i /><span>APPROVAL</span><i /><span>HISTORY</span></div>
             </div>
             <div data-cue className="foundation-preview relative min-h-[420px] overflow-hidden border-t border-white/15 lg:border-l lg:border-t-0">
-              <img src="/manus-storage/groupware-dashboard_c4f7d7ee.png" alt="CONCOST 그룹웨어 통합 대시보드" className="foundation-dashboard-preview h-full w-full object-cover object-top" />
+              <img src={manusAsset("groupware-dashboard_c4f7d7ee.png")} alt="CONCOST 그룹웨어 통합 대시보드" className="foundation-dashboard-preview h-full w-full object-cover object-top" />
               <div aria-hidden="true" className="foundation-preview-scan" />
             </div>
           </div>
 
           <div aria-hidden="true" className="foundation-transition-surface" />
 
-          <div data-cue className="foundation-space foundation-space-groupware"><div className="foundation-space-copy"><p>01 — GROUPWARE</p><h3>업무의 흐름을<br />한 곳에서.</h3><span>프로젝트 · 업무 · 일정 · 승인 · 변경 이력</span></div><div className="foundation-app-frame"><img src="/manus-storage/groupware-board_45f13c16.png" alt="CONCOST 그룹웨어 프로젝트 보드" className="groupware-board-screen" /><div aria-hidden="true" className="continuous-data-line data-line-project" /></div></div>
-          <div data-cue className="foundation-space foundation-space-messenger"><div className="foundation-space-copy"><p>02 — MESSENGER</p><h3><span className="block whitespace-nowrap">대화에서 업무로,</span><span className="block whitespace-nowrap">메신저가 업무와 이어집니다.</span></h3><span>프로젝트별 대화 · 업무 생성 · 일정 변경 · 파일 · 승인 알림</span></div><div className="messenger-stage"><img src="/manus-storage/messenger-ui_25d14687.png" alt="CON-COST 사내 메신저 화면" className="messenger-product-screen" /><div aria-hidden="true" className="continuous-data-line data-line-message" /></div></div>
+          <div data-cue className="foundation-space foundation-space-groupware"><div className="foundation-space-copy"><p>01 — GROUPWARE</p><h3>업무의 흐름을<br />한 곳에서.</h3><span>프로젝트 · 업무 · 일정 · 승인 · 변경 이력</span></div><div className="foundation-app-frame"><img src={manusAsset("groupware-board_45f13c16.png")} alt="CONCOST 그룹웨어 프로젝트 보드" className="groupware-board-screen" /><div aria-hidden="true" className="continuous-data-line data-line-project" /></div></div>
+          <div data-cue className="foundation-space foundation-space-messenger"><div className="foundation-space-copy"><p>02 — MESSENGER</p><h3><span className="block whitespace-nowrap">대화에서 업무로,</span><span className="block whitespace-nowrap">메신저가 업무와 이어집니다.</span></h3><span>프로젝트별 대화 · 업무 생성 · 일정 변경 · 파일 · 승인 알림</span></div><div className="messenger-stage"><img src={manusAsset("messenger-ui_25d14687.png")} alt="CON-COST 사내 메신저 화면" className="messenger-product-screen" /><div aria-hidden="true" className="continuous-data-line data-line-message" /></div></div>
           <div data-cue className="foundation-space foundation-space-claim"><div className="foundation-space-copy"><p>03 — CLAIM CENTER</p><h3>사건 · 쟁점 · 증거 · 기한을<br />하나의 체계로.</h3><span>건설 클레임 업무 전용 독립 시스템</span></div><div className="claim-cinematic-stage"><img src={claimCenterEndFrameSrc} alt="CONCOST Claim Center Studio 제품 비전 최종 화면" className="claim-endframe-screen" />{claimCenterVideoSrc && <video className="claim-cinematic-video" src={claimCenterVideoSrc} poster={claimCenterEndFrameSrc} muted playsInline preload="auto" onEnded={(event) => { const foundation = event.currentTarget.closest("#foundation"); foundation?.classList.remove("claim-video-playing"); foundation?.classList.add("claim-video-settled"); }} onError={(event) => { const foundation = event.currentTarget.closest("#foundation"); foundation?.classList.remove("claim-video-playing"); foundation?.classList.add("claim-video-settled"); }} />}<div aria-hidden="true" className="claim-video-progress"><i /></div><div aria-hidden="true" className="continuous-data-line data-line-claim" /></div></div>
-          <div data-cue className="foundation-space foundation-space-products"><div className="foundation-space-copy"><p>THREE PRODUCT VIEW</p><h3><span>세 개의 시스템,</span><span>하나의 업무 흐름.</span></h3></div><div className="product-spatial"><div className="product-screen product-screen-groupware"><img src="/manus-storage/groupware-board_45f13c16.png" alt="Groupware 제품 화면" className="product-screen-shot" /></div><div className="product-screen product-screen-messenger"><img src="/manus-storage/messenger-ui_25d14687.png" alt="Messenger 제품 화면" className="product-screen-shot" /></div><div className="product-screen product-screen-claim"><img src={claimCenterEndFrameSrc} alt="Claim Center 제품 비전 최종 화면" className="product-screen-shot" /></div><div aria-hidden="true" className="product-link product-link-one" /><div aria-hidden="true" className="product-link product-link-two" /><div aria-hidden="true" className="product-link product-link-three" /><div aria-hidden="true" className="continuous-data-line data-line-products" /></div></div>
-          <div data-cue className="foundation-space foundation-space-vision"><div className="foundation-space-copy"><p>LONG-TERM PRODUCT PLAN</p><h3><span className="vision-main-line vision-tone-teal">우리 업무에 맞추고</span><span className="vision-main-line vision-tone-cyan">불편은 줄이고</span><span className="vision-main-line vision-tone-gold">필요한 시스템은</span><span className="vision-main-line vision-tone-gold">우리가 직접 만듭니다.</span></h3><strong>GROUPWARE · MESSENGER · CLAIM CENTER</strong><em>업무 친화성과 사용자의 불편 최소화를 최우선으로 하는 자체개발 시스템</em></div><div aria-hidden="true" className="vision-product-echo"><div><img src="/manus-storage/groupware-board_45f13c16.png" alt="" /><small>GROUPWARE</small><i /></div><div><img src="/manus-storage/messenger-ui_25d14687.png" alt="" /><small>MESSENGER</small><i /></div><div><img src={claimCenterEndFrameSrc} alt="" /><small>CLAIM CENTER</small><i /></div><span className="vision-link vision-link-one" /><span className="vision-link vision-link-two" /><span className="vision-link vision-link-three" /><span className="continuous-data-line data-line-exit" /></div></div>
+          <div data-cue className="foundation-space foundation-space-products"><div className="foundation-space-copy"><p>THREE PRODUCT VIEW</p><h3><span>세 개의 시스템,</span><span>하나의 업무 흐름.</span></h3></div><div className="product-spatial"><div className="product-screen product-screen-groupware"><img src={manusAsset("groupware-board_45f13c16.png")} alt="Groupware 제품 화면" className="product-screen-shot" /></div><div className="product-screen product-screen-messenger"><img src={manusAsset("messenger-ui_25d14687.png")} alt="Messenger 제품 화면" className="product-screen-shot" /></div><div className="product-screen product-screen-claim"><img src={claimCenterEndFrameSrc} alt="Claim Center 제품 비전 최종 화면" className="product-screen-shot" /></div><div aria-hidden="true" className="product-link product-link-one" /><div aria-hidden="true" className="product-link product-link-two" /><div aria-hidden="true" className="product-link product-link-three" /><div aria-hidden="true" className="continuous-data-line data-line-products" /></div></div>
+          <div data-cue className="foundation-space foundation-space-vision"><div className="foundation-space-copy"><p>LONG-TERM PRODUCT PLAN</p><h3><span className="vision-main-line vision-tone-teal">우리 업무에 맞추고</span><span className="vision-main-line vision-tone-cyan">불편은 줄이고</span><span className="vision-main-line vision-tone-gold">필요한 시스템은</span><span className="vision-main-line vision-tone-gold">우리가 직접 만듭니다.</span></h3><strong>GROUPWARE · MESSENGER · CLAIM CENTER</strong><em>업무 친화성과 사용자의 불편 최소화를 최우선으로 하는 자체개발 시스템</em></div><div aria-hidden="true" className="vision-product-echo"><div><img src={manusAsset("groupware-board_45f13c16.png")} alt="" /><small>GROUPWARE</small><i /></div><div><img src={manusAsset("messenger-ui_25d14687.png")} alt="" /><small>MESSENGER</small><i /></div><div><img src={claimCenterEndFrameSrc} alt="" /><small>CLAIM CENTER</small><i /></div><span className="vision-link vision-link-one" /><span className="vision-link vision-link-two" /><span className="vision-link vision-link-three" /><span className="continuous-data-line data-line-exit" /></div></div>
         </section>
 
         <section id="showcase" className="presentation-scene relative overflow-hidden border-y border-[#101c2c]/15 bg-[#e6e3da] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-labelledby="showcase-title"><div aria-hidden="true" className="showcase-entry-line" /><div aria-hidden="true" className="showcase-operating-board"><i className="showcase-flow-corner showcase-flow-corner-one" /><i className="showcase-flow-corner showcase-flow-corner-two" /><i className="showcase-flow-corner showcase-flow-corner-three" /><b className="showcase-signal-block showcase-signal-one" /><b className="showcase-signal-block showcase-signal-two" /></div>
@@ -1095,7 +1098,7 @@ export default function Home() {
                 <p data-cue className="roadmap-support-copy scene-support-copy mt-8 max-w-[540px] text-[17px] leading-8 text-[#456066]"><span className="block lg:whitespace-nowrap">RC-CAD와 전문 프로그램은 반복 입력·집계·양식 편차를 줄입니다.</span><span className="block lg:whitespace-nowrap">사람은 검토와 판단에 더 집중합니다.</span></p>
             </div>
             <div data-cue className="roadmap-draft relative min-h-[320px] overflow-hidden border border-[#101c2c]/15 bg-[#dfe5e0] lg:min-h-[370px]">
-              <ParallaxImage src="/manus-storage/devlab-roadmap_a1fcd200.jpg" alt="연결에서 표준화와 지능화로 이어지는 발전 과정" className="h-full w-full object-cover" intensity={1.1} />
+              <ParallaxImage src={manusAsset("devlab-roadmap_a1fcd200.jpg")} alt="연결에서 표준화와 지능화로 이어지는 발전 과정" className="h-full w-full object-cover" intensity={1.1} />
               <div aria-hidden="true" className="cad-draw-sequence"><i /><i /><i /><i /><i /></div>
               <div className="absolute inset-x-0 bottom-0 bg-[#f3f0e9]/95 p-5 backdrop-blur-sm sm:p-7">
                 <p className="font-display text-xl font-extrabold tracking-[-0.045em]">반복 명령은 프로그램이, 검토와 판단은 사람이.</p>
@@ -1153,7 +1156,7 @@ export default function Home() {
         </section>
 
         <section id="brand-end" className="presentation-scene brand-end-scene relative grid overflow-hidden bg-[#0c1724] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-label="CONCOST 브랜드 엔드카드">
-          <div className="brand-end-logo" aria-label="CONCOST"><img src="/manus-storage/concost-logo_747fe330.png" alt="CONCOST" /></div>
+          <div className="brand-end-logo" aria-label="CONCOST"><img src={manusAsset("concost-logo_747fe330.png")} alt="CONCOST" /></div>
         </section>
       </main>
       <PresentationControls />
