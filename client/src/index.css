@@ -1606,8 +1606,10 @@ img.asset-fallback {
   .presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(2) { animation-delay:90ms; }.presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(3) { animation-delay:180ms; }.presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(4) { animation-delay:270ms; }.presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(5) { animation-delay:360ms; }.presentation-mode #brand-end[data-signature-state="running"] .ending-object:nth-child(6) { animation-delay:450ms; }
   .presentation-mode #brand-end[data-signature-state="running"] .ending-compression-line { animation:signature-ending-compress 700ms cubic-bezier(.77,0,.175,1) 1900ms both; }
   .presentation-mode #brand-end[data-signature-state="running"] .ending-blackout { animation:signature-ending-blackout 900ms linear 2450ms both; }
-  .presentation-mode #brand-end[data-signature-state="running"] .ending-signature-copy p:first-child { animation:signature-ending-copy 520ms cubic-bezier(.23,1,.32,1) 3220ms both; }.presentation-mode #brand-end[data-signature-state="running"] .ending-signature-copy p:last-child { animation:signature-ending-copy 520ms cubic-bezier(.23,1,.32,1) 4020ms both; }
+  .presentation-mode #brand-end[data-signature-state="running"] .ending-signature-copy p:first-child { animation:signature-ending-copy 520ms cubic-bezier(.23,1,.32,1) 3220ms both,signature-ending-copy-clear 260ms linear 4480ms forwards; }.presentation-mode #brand-end[data-signature-state="running"] .ending-signature-copy p:last-child { animation:signature-ending-copy 520ms cubic-bezier(.23,1,.32,1) 4020ms both,signature-ending-copy-clear 260ms linear 4480ms forwards; }
   .presentation-mode #brand-end .brand-end-logo { opacity:0; z-index:80; }.presentation-mode #brand-end[data-signature-state="running"] .brand-end-logo { animation:signature-ending-logo 700ms cubic-bezier(.23,1,.32,1) 4580ms both !important; transform:none; }.presentation-mode #brand-end[data-signature-state="running"] .brand-end-logo img { animation:none !important; clip-path:inset(0) !important; transform:none !important; }
+  .presentation-mode #brand-end .ending-thanks { color:#f3f0e9; font-family:"SUIT",sans-serif; font-size:clamp(1.25rem,2vw,2rem); font-weight:800; letter-spacing:.12em; margin-top:28px; opacity:0; text-align:center; transform:translateY(14px); }
+  .presentation-mode #brand-end[data-signature-state="running"] .ending-thanks { animation:signature-thanks-reveal 520ms cubic-bezier(.23,1,.32,1) 5350ms both; }
 }
 
 @keyframes signature-crosshair { 0% { opacity:0; transform:translate(-50%,-50%) scale(1.8); } 68% { opacity:1; transform:translate(-50%,-50%) scale(.94); } 100% { opacity:1; transform:translate(-50%,-50%) scale(1); } }
@@ -1633,7 +1635,9 @@ img.asset-fallback {
 @keyframes signature-ending-compress { 0% { opacity:0; transform:translate(-50%,-50%) scaleX(.02); } 28% { opacity:1; transform:translate(-50%,-50%) scaleX(1); } 76% { opacity:1; transform:translate(-50%,-50%) scaleX(.12); } 100% { opacity:0; transform:translate(-50%,-50%) scaleX(.12); } }
 @keyframes signature-ending-blackout { 0% { opacity:0; } 12% { opacity:1; } 68% { opacity:1; } 100% { opacity:0; } }
 @keyframes signature-ending-copy { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+@keyframes signature-ending-copy-clear { from { opacity:1; } to { opacity:0; } }
 @keyframes signature-ending-logo { from { opacity:0; transform:translateY(-68px) scale(.94); } to { opacity:1; transform:translateY(-104px) scale(1); } }
+@keyframes signature-thanks-reveal { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 
 @media (min-width:1024px) and (prefers-reduced-motion:reduce) {
   .presentation-mode .signature-opening,
