@@ -988,7 +988,7 @@ export default function Home() {
                 <a href="#why" className="inline-flex items-center gap-3 bg-[#101c2c] px-6 py-4 text-[14px] font-extrabold text-white transition-all duration-200 hover:bg-[#008b8b] active:scale-[0.97]">
                   변화의 흐름 보기 <ArrowDown size={17} />
                 </a>
-                <p className="whitespace-nowrap text-[clamp(10px,.72vw,12px)] font-semibold leading-5 text-[#547075]">모두가 발견한 개선이 함께 쓰는 표준이 됩니다.</p>
+                <p className="hero-cta-note whitespace-nowrap text-[clamp(10px,.72vw,12px)] font-semibold leading-5 text-[#547075]">모두가 발견한 개선이 함께 쓰는 표준이 됩니다.</p>
               </div>
             </div>
 
@@ -1230,7 +1230,7 @@ export default function Home() {
                 {officialWebsites.map((site, index) => (
                   <a key={site.name} href={site.href} target="_blank" rel="noreferrer" aria-disabled={undefined} onClick={(event) => { if (document.documentElement.classList.contains("presentation-mode")) { event.preventDefault(); event.stopPropagation(); } }} onKeyDown={(event) => { if (document.documentElement.classList.contains("presentation-mode") && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); event.stopPropagation(); } }} data-presentation-link data-no-cue className={`client-browser-card client-browser-card-${index + 1} group relative grid min-w-0 overflow-hidden border border-[#101c2c]/15 bg-[#f3f0e9]`}><span aria-hidden="true" className="showcase-case-node showcase-case-node-client">0{index + 3}</span>
                     <div className="client-site-frame relative overflow-hidden bg-[#101c2c]"><img src={site.image} alt={`${site.name} 공식 웹사이트 화면`} className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" /><span aria-hidden="true" className="client-site-frame-label">{site.code} · LIVE SITE</span></div>
-                    <div className="client-card-details official-site-details flex min-w-0 flex-col justify-between"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="font-display break-words font-extrabold tracking-[-0.04em] text-[#101c2c]">{site.name}</p><p className="mt-1 break-words font-bold text-[#547075]">{site.type}</p></div><ArrowUpRight size={16} className="mt-0.5 shrink-0 text-[#008b8b]" /></div><p className="official-site-description mt-2 text-[10px] leading-[1.45] text-[#547075]">{site.description}</p></div>
+                    <div className="client-card-details official-site-details flex min-w-0 flex-col justify-between"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="font-display break-words font-extrabold tracking-[-0.04em] text-[#101c2c]">{site.name}</p><p className="official-site-type mt-1 break-words font-bold text-[#547075]">{site.type}</p></div><ArrowUpRight size={16} className="mt-0.5 shrink-0 text-[#008b8b]" /></div><p className="official-site-description mt-2 text-[10px] leading-[1.45] text-[#547075]">{site.description}</p></div>
                   </a>
                 ))}
               </div>
@@ -1317,11 +1317,11 @@ export default function Home() {
           <div aria-hidden="true" className="absolute inset-x-0 top-0 h-2 bg-[#00a6a6]" />
           <div aria-hidden="true" className="message-convergence"><i /><i /><i /><i /><i /></div>
           <div className="relative z-[1] mx-auto flex min-h-[100svh] max-w-[1160px] flex-col items-center justify-center px-5 py-16 text-center sm:px-8 lg:min-h-[100vh] lg:px-12">
-            <p className="text-[11px] font-extrabold tracking-[0.2em] text-[#42d5ce]">THE NEXT TASK STARTS WITH YOU</p>
+            <p className="message-kicker text-[11px] font-extrabold tracking-[0.2em] text-[#42d5ce]">THE NEXT TASK STARTS WITH YOU</p>
             <h2 id="message-title" className="font-display mt-7 max-w-[1050px] text-[clamp(3rem,6vw,6.8rem)] font-extrabold leading-[.92] tracking-[-0.08em]"><span className="ending-line ending-line-system cue-highlight-marker cue-color-coral">반복은 시스템이,</span><br /><span className="ending-line ending-line-human cue-underline safe-underline cue-color-amber">판단은 사람이.</span></h2>
             <div className="mt-12 w-full max-w-[900px] border-y border-white/20 px-4 py-8 sm:px-8 lg:mt-14 lg:px-12 lg:py-10">
               <p className="text-[clamp(1.35rem,1.65vw,1.9rem)] font-bold leading-[1.45] tracking-[-0.045em]">개인의 경험을 회사의 시스템과 자산으로 남기겠습니다.</p>
-              <p className="mx-auto mt-5 max-w-[720px] text-[15px] leading-7 text-[#c2d0d0] lg:text-[17px] lg:leading-8">직원 한 명의 불편이 다음 개발과제가 됩니다. 더 잘 일하는 방식을 함께 만들어 갑니다.</p>
+              <p className="message-support-detail mx-auto mt-5 max-w-[720px] text-[15px] leading-7 text-[#c2d0d0] lg:text-[17px] lg:leading-8">직원 한 명의 불편이 다음 개발과제가 됩니다. 더 잘 일하는 방식을 함께 만들어 갑니다.</p>
             </div>
           </div>
         </section>

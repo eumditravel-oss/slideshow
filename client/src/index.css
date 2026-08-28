@@ -1827,3 +1827,83 @@ img.asset-fallback {
   .presentation-mode #brand-end .brand-end-logo { opacity:1; transform:none; }
   .presentation-mode .signature-ending { display:none; }
 }
+
+/* Audience readability pass: enlarge supporting text without changing authored line breaks. */
+@media (min-width:1024px) {
+  .presentation-mode #hero .hero-cta-note { font-size:13px; }
+
+  .presentation-mode .signature-why-object { min-height:88px; width:182px; }
+  .presentation-mode .signature-why-object b { font-size:12px; }
+  .presentation-mode .signature-why-object span { font-size:11px; }
+
+  .presentation-mode #foundation .foundation-space-copy > p { font-size:13px; }
+  .presentation-mode #foundation .foundation-space-vision .foundation-space-copy strong { font-size:14px; }
+  .presentation-mode #foundation .foundation-space-vision .foundation-space-copy em { font-size:14px; }
+  .presentation-mode #foundation .vision-product-echo small { font-size:10px; white-space:nowrap; }
+
+  .presentation-mode .signature-rc-drawing text { font-size:16px; }
+  .presentation-mode .signature-rc-sequence span { font-size:11px; }
+  .presentation-mode .signature-rc-quantity small { font-size:12px; }
+  .presentation-mode .signature-rc-quantity p,
+  .presentation-mode .signature-rc-quantity strong { font-size:14px; }
+
+  .presentation-mode #showcase .showcase-conversion-axis span { font-size:11px; }
+  .presentation-mode #showcase .platform-evidence-coordinate,
+  .presentation-mode #showcase .platform-evidence-origin { font-size:10px; }
+  .presentation-mode #showcase .platform-feature-caption { font-size:11px; }
+  .presentation-mode #showcase .platform-workflow small { font-size:9px; }
+  .presentation-mode #showcase .platform-workflow span { font-size:10px; }
+  .presentation-mode #showcase .client-site-frame-label { font-size:9.5px; }
+  .presentation-mode #showcase .official-site-details > div > div > p:first-child { font-size:15px; }
+  .presentation-mode #showcase .official-site-details > div > div > .official-site-type { font-size:11px; line-height:1.3; }
+  .presentation-mode #showcase .client-text-references > span { font-size:9.5px; }
+  .presentation-mode #showcase .client-text-references a { font-size:10.5px; }
+  .presentation-mode #showcase .client-text-references a small { font-size:9.5px; }
+
+  .presentation-mode #message .message-kicker { font-size:14px; }
+  .presentation-mode #message .message-support-detail { font-size:18px; max-width:900px; white-space:nowrap; }
+
+  .presentation-mode #brand-end .ending-object { width:205px; }
+  .presentation-mode #brand-end .ending-object span { font-size:12px; }
+}
+
+@media (min-width:1500px) {
+  .presentation-mode #hero .hero-cta-note { font-size:15px; }
+
+  .presentation-mode .signature-why-object { min-height:94px; width:194px; }
+  .presentation-mode .signature-why-object b { font-size:14px; }
+  .presentation-mode .signature-why-object span { font-size:13px; }
+
+  .presentation-mode #foundation .foundation-space-copy > p { font-size:15px; }
+  .presentation-mode #foundation .foundation-space-vision .foundation-space-copy strong,
+  .presentation-mode #foundation .foundation-space-vision .foundation-space-copy em { font-size:16px; }
+  .presentation-mode #foundation .vision-product-echo small { font-size:12px; }
+
+  .presentation-mode .signature-rc-drawing text { font-size:18px; }
+  .presentation-mode .signature-rc-sequence span { font-size:13px; }
+  .presentation-mode .signature-rc-quantity small { font-size:13px; }
+  .presentation-mode .signature-rc-quantity p,
+  .presentation-mode .signature-rc-quantity strong { font-size:16px; }
+
+  .presentation-mode #showcase .showcase-conversion-axis span { font-size:12px; }
+  .presentation-mode #showcase .platform-evidence-coordinate,
+  .presentation-mode #showcase .platform-evidence-origin { font-size:11px; }
+  .presentation-mode #showcase .platform-feature-caption { font-size:12px; }
+  .presentation-mode #showcase .platform-workflow small { font-size:9.5px; }
+  .presentation-mode #showcase .platform-workflow span { font-size:11px; }
+  .presentation-mode #showcase .client-site-frame-label { font-size:10px; }
+  .presentation-mode #showcase .official-site-details > div > div > p:first-child { font-size:18px; }
+  .presentation-mode #showcase .official-site-type { white-space:nowrap; }
+  .presentation-mode #showcase .official-site-details > div > div > .official-site-type { font-size:12px; }
+  .presentation-mode #showcase .client-text-references > span { font-size:10px; }
+  .presentation-mode #showcase .client-text-references a { font-size:11px; }
+  .presentation-mode #showcase .client-text-references a small { font-size:9.5px; }
+
+  .presentation-mode #roadmap .roadmap-support-copy { font-size:20px !important; }
+  .presentation-mode #impact .impact-row p { font-size:19px; line-height:1.35; white-space:nowrap; }
+  .presentation-mode #message .message-kicker { font-size:17px; }
+  .presentation-mode #message .message-support-detail { font-size:20px; }
+
+  .presentation-mode #brand-end .ending-object { width:218px; }
+  .presentation-mode #brand-end .ending-object span { font-size:14px; }
+}
