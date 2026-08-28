@@ -1522,6 +1522,53 @@ img.asset-fallback {
   .presentation-mode #showcase .client-site-frame { padding: 7px 10px; }
 }
 
+/* COMMON FOUNDATION density: use the full stage height instead of leaving the remaining viewport at the bottom. */
+@media (min-width:1024px) {
+  .presentation-mode #foundation .foundation-base {
+    align-items:stretch;
+    height:100dvh;
+    min-height:100dvh;
+  }
+  .presentation-mode #foundation .foundation-base > div:first-child {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    min-height:100dvh;
+    padding-bottom:clamp(2.5rem,5.5vh,4.75rem) !important;
+    padding-top:clamp(2.5rem,5.5vh,4.75rem) !important;
+  }
+  .presentation-mode #foundation .foundation-preview {
+    min-height:100dvh;
+  }
+  .presentation-mode #foundation .foundation-dashboard-preview {
+    height:min(84vh,900px);
+    width:min(92%,720px);
+  }
+  .presentation-mode #foundation .foundation-product-card {
+    min-height:clamp(148px,15vh,170px);
+  }
+  .presentation-mode #foundation .groupware-sequence {
+    margin-top:clamp(2rem,4vh,3.5rem);
+  }
+}
+
+@media (min-width:1024px) and (max-width:1499px) and (max-height:850px) {
+  .presentation-mode #foundation .foundation-base > div:first-child {
+    padding-bottom:28px !important;
+    padding-top:28px !important;
+  }
+  .presentation-mode #foundation .foundation-dashboard-preview {
+    height:min(64vh,492px);
+    width:min(92%,850px);
+  }
+  .presentation-mode #foundation .foundation-product-card {
+    min-height:128px;
+  }
+  .presentation-mode #foundation .groupware-sequence {
+    margin-top:24px;
+  }
+}
+
 /* Signature cinematic moments — five deliberate peaks, isolated from the stable scene-transition engine. */
 .signature-opening,
 .signature-why,
