@@ -213,6 +213,7 @@ function PresentationControls() {
   const foundationCueSwapTimer = useRef<number | null>(null);
   const claimPlaybackTimer = useRef<number | null>(null);
   const signatureLockTimer = useRef<number | null>(null);
+  const roadmapRevealTimer = useRef<number | null>(null);
 
   const goTo = (index: number) => {
     cueRef.current = 0;
@@ -311,25 +312,80 @@ function PresentationControls() {
         });
       }, 90);
     };
-    video.defaultPlaybackRate = 1.08;
-    video.playbackRate = 1.08;
+    video.defaultPlaybackRate = 1.44;
+    video.playbackRate = 1.44;
     video.currentTime = .18;
     if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) play();
     else video.addEventListener("canplay", play, { once: true });
   };
 
   const advanceCue = () => {
-    const cueCount = getCueElements().length;
+    const cueElements = getCueElements();
+    const cueCount = cueElements.length;
     const activeSceneId = presentationScenes[active][0];
     const isWorkScene = activeSceneId === "work";
     const currentCue = cueRef.current;
-    const nextCueElement = getCueElements()[currentCue];
+    const nextCueElement = cueElements[currentCue];
     const isFoundationTakeover = activeSceneId === "foundation" && nextCueElement?.classList.contains("foundation-space");
     const isClaimTakeover = isFoundationTakeover && nextCueElement?.classList.contains("foundation-space-claim");
     const isVisionTakeover = isFoundationTakeover && nextCueElement?.classList.contains("foundation-space-vision");
     const isProductsTakeover = isFoundationTakeover && nextCueElement?.classList.contains("foundation-space-products");
     if (cinematicInputLocked.current) return;
     if (isPresentation && !assetsReadyRef.current) return;
+
+    if (activeSceneId === "why" && currentCue === 1) {
+      cinematicInputLocked.current = true;
+      cueRef.current = cueCount;
+      setCue(cueRef.current);
+      window.setTimeout(() => { cinematicInputLocked.current = false; }, 1500);
+      return;
+    }
+
+    if (activeSceneId === "roadmap" && currentCue === 1) {
+      const roadmap = document.getElementById("roadmap");
+      cinematicInputLocked.current = true;
+      roadmap?.classList.remove("roadmap-content-revealed");
+      roadmap?.classList.add("roadmap-content-revealing");
+      cueRef.current = cueCount;
+      setCue(cueRef.current);
+      if (roadmapRevealTimer.current) window.clearTimeout(roadmapRevealTimer.current);
+      roadmapRevealTimer.current = window.setTimeout(() => {
+        roadmap?.classList.remove("roadmap-content-revealing");
+        roadmap?.classList.add("roadmap-content-revealed");
+        window.dispatchEvent(new Event("resize"));
+        cinematicInputLocked.current = false;
+        roadmapRevealTimer.current = null;
+      }, 1100);
+      return;
+    }
+
+    if (isWorkScene && currentCue === 1) {
+      const firstRowIndex = cueElements.findIndex((element) => element.classList.contains("work-row"));
+      if (firstRowIndex >= 0) {
+        cueRef.current = firstRowIndex + 1;
+        setCue(cueRef.current);
+        return;
+      }
+    }
+
+    if (isWorkScene) {
+      const lastRowIndex = cueElements.reduce((last, element, index) => element.classList.contains("work-row") ? index : last, -1);
+      if (lastRowIndex >= 0 && currentCue === lastRowIndex + 1) {
+        cueRef.current = cueCount + 1;
+        setCue(cueRef.current);
+        return;
+      }
+    }
+
+    if (activeSceneId === "impact" && currentCue === 1) {
+      const firstImpactIndex = cueElements.findIndex((element) => element.classList.contains("impact-row"));
+      if (firstImpactIndex >= 0) {
+        cueRef.current = firstImpactIndex + 1;
+        setCue(cueRef.current);
+        return;
+      }
+    }
+
     const claimVideo = document.querySelector<HTMLVideoElement>(".claim-cinematic-video");
     if (activeSceneId === "foundation" && currentCue === 4 && claimVideo && !claimVideo.paused && !claimVideo.ended) {
       settleClaimPlayback();
@@ -580,8 +636,11 @@ function PresentationControls() {
       scene.dataset.signatureState = "idle";
       scene.classList.remove("signature-hold");
     });
+    document.getElementById("roadmap")?.classList.remove("roadmap-content-revealing", "roadmap-content-revealed");
     if (signatureLockTimer.current) window.clearTimeout(signatureLockTimer.current);
+    if (roadmapRevealTimer.current) window.clearTimeout(roadmapRevealTimer.current);
     signatureLockTimer.current = null;
+    roadmapRevealTimer.current = null;
     if (!isPresentation || !assetsReady) return;
 
     const activeSceneId = presentationScenes[active][0];
@@ -601,7 +660,9 @@ function PresentationControls() {
 
     return () => {
       if (signatureLockTimer.current) window.clearTimeout(signatureLockTimer.current);
+      if (roadmapRevealTimer.current) window.clearTimeout(roadmapRevealTimer.current);
       signatureLockTimer.current = null;
+      roadmapRevealTimer.current = null;
     };
   }, [active, assetsReady, isPresentation]);
 
@@ -1218,7 +1279,7 @@ export default function Home() {
             <div data-cue className="impact-ledger relative mt-6 border-y border-[#101c2c]/15 bg-[#f3f0e9]"><div aria-hidden="true" className="impact-system-core">SYSTEM</div>
               <div className="hidden grid-cols-[72px_.72fr_1.28fr] border-b border-[#101c2c]/15 px-6 py-2 text-[10px] font-extrabold tracking-[0.16em] text-[#547075] lg:grid"><span>AXIS</span><span>업무 조직</span><span>달라지는 경험</span></div>
               {departments.map(([title, desc], index) => (
-                <article key={title} data-cue className="group grid min-w-0 gap-3 border-b border-[#101c2c]/15 px-0 py-4 last:border-b-0 lg:grid-cols-[72px_.72fr_1.28fr] lg:gap-0 lg:py-1">
+                <article key={title} data-cue className="impact-row group grid min-w-0 gap-3 border-b border-[#101c2c]/15 px-0 py-4 last:border-b-0 lg:grid-cols-[72px_.72fr_1.28fr] lg:gap-0 lg:py-1">
                   <div className="relative px-0 lg:border-r lg:border-[#101c2c]/15 lg:px-6 lg:py-6"><span className="font-display text-[15px] font-extrabold text-[#008b8b]">0{index + 1}</span><span className="absolute bottom-0 left-[29px] top-[46px] hidden border-l border-dashed border-[#00a6a6]/35 lg:block" /></div>
                   <div className="min-w-0 px-0 lg:border-r lg:border-[#101c2c]/15 lg:px-6 lg:py-6"><h3 className="font-display break-words text-xl font-extrabold tracking-[-0.05em]">{title}</h3></div>
                   <div className="relative min-w-0 border-l-2 border-[#00a6a6] pl-5 lg:my-6 lg:ml-6 lg:border-l-0 lg:pl-6 lg:pr-7"><p className="min-w-0 max-w-none break-words text-[13px] leading-5 text-[#547075]">{desc}</p><ArrowUpRight size={16} className="absolute right-0 top-0 hidden text-[#00a6a6] lg:block" /></div>
