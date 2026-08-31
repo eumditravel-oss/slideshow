@@ -1096,7 +1096,6 @@ export default function Home() {
               <div className="why-conflict why-conflict-owner"><small>DATA OWNER</small><b>UNKNOWN</b></div>
               <div className="why-conflict why-conflict-wait"><small>APPROVAL WAIT</small><b>+ 03 DAYS</b></div>
             </div>
-            <div className="why-cinematic-copy"><small>WHY NOW / THE DISCONNECTED REALITY</small><p>업무는 연결되어 있지만,</p><p>도구와 데이터는 나뉘어 있었습니다.</p></div>
           </div>
           <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
             <div className="grid gap-14 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
