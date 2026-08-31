@@ -92,12 +92,6 @@ const ownedPlatforms = [
   },
 ];
 
-const clientWebsites = [
-  { name: "한강엔지니어링", type: "안전진단 전문기관", href: "https://eumditravel-oss.github.io/website3/" },
-  { name: "선진건설", type: "토건·현장 시공 안내", href: "https://eumditravel-oss.github.io/sample_site1/" },
-  { name: "동성건설", type: "토목·건축·외부시설", href: "https://eumditravel-oss.github.io/sample_site2/" },
-];
-
 const officialWebsites = [
   {
     code: "SITE 01",
@@ -1234,11 +1228,12 @@ export default function Home() {
                   </a>
                 ))}
               </div>
-              <div className="client-text-references" aria-label="외부 의뢰 웹사이트 제작 사례">
-                <span>CLIENT WEBSITE BUILD</span>
-                {clientWebsites.map((site) => (
-                  <a key={site.name} href={site.href} target="_blank" rel="noreferrer" onClick={(event) => { if (document.documentElement.classList.contains("presentation-mode")) { event.preventDefault(); event.stopPropagation(); } }} onKeyDown={(event) => { if (document.documentElement.classList.contains("presentation-mode") && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); event.stopPropagation(); } }} data-presentation-link data-no-cue>{site.name}<small>{site.type}</small></a>
-                ))}
+              <div className="website-revenue-model" aria-label="웹사이트 구축과 유지보수를 통한 향후 구독형 수익모델">
+                <span>FUTURE REVENUE MODEL</span>
+                <p><b>01</b> 웹사이트 구축 의뢰</p><i aria-hidden="true">→</i>
+                <p><b>02</b> 정기 유지보수</p><i aria-hidden="true">→</i>
+                <strong><b>03</b> 구독형 반복 수익으로 확장</strong>
+                <em>향후 계획</em>
               </div>
             </div>
           </div>
