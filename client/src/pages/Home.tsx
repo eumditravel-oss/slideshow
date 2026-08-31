@@ -163,8 +163,8 @@ const presentationStageTones: Record<string, string> = {
 type StageTransitionDirection = "left" | "right" | "up" | "down" | "center" | "depth";
 
 const sceneTransitionProfiles: Record<string, { duration: number; swap: number; inputHold?: number; direction: StageTransitionDirection }> = {
-  hero: { duration: 760, swap: 342, inputHold: 5100, direction: "center" },
-  why: { duration: 680, swap: 306, inputHold: 4750, direction: "left" },
+  hero: { duration: 760, swap: 342, inputHold: 5500, direction: "center" },
+  why: { duration: 680, swap: 306, inputHold: 7700, direction: "left" },
   build: { duration: 680, swap: 306, direction: "right" },
   work: { duration: 760, swap: 342, direction: "down" },
   foundation: { duration: 760, swap: 342, direction: "center" },
@@ -176,8 +176,8 @@ const sceneTransitionProfiles: Record<string, { duration: number; swap: number; 
 };
 
 const signatureSceneDurations: Record<string, number> = {
-  hero: 4550,
-  why: 4250,
+  hero: 5200,
+  why: 7350,
   roadmap: 5150,
   "brand-end": 4900,
 };
@@ -1065,17 +1065,38 @@ export default function Home() {
         <section id="why" data-signature-scene className="presentation-scene border-y border-[#101c2c] bg-[#101c2c] text-[#f3f0e9] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-labelledby="why-title">
           <div aria-hidden="true" className="signature-why">
             <div className="signature-why-camera">
-              <svg viewBox="0 0 1200 700" preserveAspectRatio="none">
-                <path className="why-network-line why-network-main" pathLength="1" d="M100 350H1100M210 350V160H520V350M520 350V545H835V350M835 350V170H1030" />
-                <path className="why-network-pulse" pathLength="1" d="M100 350H1100M210 350V160H520V350M520 350V545H835V350M835 350V170H1030" />
+              <div className="signature-why-meta"><b>OPERATING NETWORK / LIVE MODEL</b><span>REV. 14 · 06 SYSTEMS · 01 FLOW</span></div>
+              <div className="signature-why-stage">
+                <span>01 CONNECT</span><span>02 CIRCULATE</span><span>03 FRACTURE</span><span>04 REVEAL</span>
+              </div>
+              <svg className="why-network-svg" viewBox="0 0 1440 800" preserveAspectRatio="none">
+                <g className="why-network-grid">
+                  <path pathLength="1" d="M80 126H1360M80 674H1360M152 74V726M1288 74V726" />
+                  <path pathLength="1" d="M360 126V674M720 126V674M1080 126V674M152 264H1288M152 400H1288M152 536H1288" />
+                </g>
+                <g className="why-network-main">
+                  <path className="why-network-line" pathLength="1" d="M160 400H1280M720 118V682M160 400V228H240M480 400V164H600M960 400V242H1190M300 400V622H350M720 540V674H760M1100 400V612H1170" />
+                  <path className="why-network-line why-network-inner" pathLength="1" d="M480 332H960V468H480ZM600 332V468M840 332V468M480 400H960" />
+                </g>
+                <path className="why-network-pulse why-pulse-one" pathLength="1" d="M160 400H1280M720 118V682M160 400V228H240M480 400V164H600M960 400V242H1190M300 400V622H350M720 540V674H760M1100 400V612H1170" />
+                <path className="why-network-pulse why-pulse-two" pathLength="1" d="M1280 400H160M720 682V118M1190 242H960V400M760 674H720V400M350 622H300V400" />
+                <g className="why-network-breaks">
+                  <path d="M286 391l18 18m-18 0 18-18M586 155l18 18m-18 0 18-18M944 391l18 18m-18 0 18-18M708 530l24 20m-24 0 24-20M1088 603l20 18m-20 0 20-18" />
+                </g>
               </svg>
-              <div className="signature-why-object why-object-excel"><Grid3X3 /><b>EXCEL</b><span>수량 데이터</span></div>
-              <div className="signature-why-object why-object-pdf"><FileText /><b>PDF</b><span>납품 문서</span></div>
-              <div className="signature-why-object why-object-message"><MessageSquareText /><b>MESSENGER</b><span>대화 기록</span></div>
-              <div className="signature-why-object why-object-calendar"><Clock3 /><b>CALENDAR</b><span>일정</span></div>
-              <div className="signature-why-object why-object-revision"><Route /><b>REVISION</b><span>수정 이력</span></div>
-              <div className="signature-why-object why-object-approval"><Check /><b>APPROVAL</b><span>승인</span></div>
+              <div className="why-operating-core"><i /><i /><small>ONE OPERATING FLOW</small><b>CONNECTED</b><span>DATA / DOCUMENT / DECISION</span></div>
+              <div className="signature-why-object why-object-excel"><Grid3X3 /><b>EXCEL</b><span>수량 데이터</span><em>CONNECTED</em></div>
+              <div className="signature-why-object why-object-pdf"><FileText /><b>PDF</b><span>납품 문서</span><em>CONNECTED</em></div>
+              <div className="signature-why-object why-object-message"><MessageSquareText /><b>MESSENGER</b><span>대화 기록</span><em>CONNECTED</em></div>
+              <div className="signature-why-object why-object-calendar"><Clock3 /><b>CALENDAR</b><span>일정</span><em>CONNECTED</em></div>
+              <div className="signature-why-object why-object-revision"><Route /><b>REVISION</b><span>수정 이력</span><em>CONNECTED</em></div>
+              <div className="signature-why-object why-object-approval"><Check /><b>APPROVAL</b><span>승인</span><em>CONNECTED</em></div>
+              <div className="why-fracture-trigger"><span>SYSTEM MISMATCH DETECTED</span><b>ONE FLOW / SIX SOURCES</b></div>
+              <div className="why-conflict why-conflict-version"><small>VERSION CONFLICT</small><b>REV.12 ↔ REV.14</b></div>
+              <div className="why-conflict why-conflict-owner"><small>DATA OWNER</small><b>UNKNOWN</b></div>
+              <div className="why-conflict why-conflict-wait"><small>APPROVAL WAIT</small><b>+ 03 DAYS</b></div>
             </div>
+            <div className="why-cinematic-copy"><small>WHY NOW / THE DISCONNECTED REALITY</small><p>업무는 연결되어 있지만,</p><p>도구와 데이터는 나뉘어 있었습니다.</p></div>
           </div>
           <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
             <div className="grid gap-14 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
