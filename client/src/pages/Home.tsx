@@ -169,17 +169,17 @@ const sceneTransitionProfiles: Record<string, { duration: number; swap: number; 
   work: { duration: 760, swap: 342, direction: "down" },
   foundation: { duration: 760, swap: 342, direction: "center" },
   showcase: { duration: 700, swap: 316, direction: "right" },
-  roadmap: { duration: 680, swap: 306, inputHold: 5650, direction: "up" },
+  roadmap: { duration: 680, swap: 306, inputHold: 7150, direction: "up" },
   impact: { duration: 720, swap: 324, direction: "center" },
   message: { duration: 680, swap: 306, inputHold: 2650, direction: "right" },
-  "brand-end": { duration: 900, swap: 405, inputHold: 5500, direction: "depth" },
+  "brand-end": { duration: 900, swap: 405, inputHold: 6900, direction: "depth" },
 };
 
 const signatureSceneDurations: Record<string, number> = {
   hero: 5200,
   why: 7350,
-  roadmap: 5150,
-  "brand-end": 4900,
+  roadmap: 6800,
+  "brand-end": 6500,
 };
 
 function ParallaxImage({
@@ -1315,20 +1315,32 @@ export default function Home() {
 
         <section id="roadmap" data-signature-scene className="presentation-scene mx-auto max-w-[1440px] border-x border-[#101c2c]/10 px-5 py-20 sm:px-8 lg:min-h-[calc(100vh-74px)] lg:snap-start lg:px-12 lg:py-20" aria-labelledby="roadmap-title">
           <div aria-hidden="true" className="signature-rc-cad">
-            <div className="signature-rc-crosshair"><i /><i /></div>
-            <svg className="signature-rc-drawing" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet">
-              <path className="rc-line" pathLength="1" d="M115 128H790M115 555H790" />
-              <path className="rc-wall" pathLength="1" d="M170 180H735V510H170ZM235 242H670V450H235Z" />
-              <path className="rc-beam" pathLength="1" d="M235 330H670M450 242V450" />
-              <path className="rc-slab" pathLength="1" d="M250 260H435V315H250ZM465 345H650V430H465Z" />
-              <path className="rc-dimension" pathLength="1" d="M170 130V108M735 130V108M170 116H735M158 180H135M158 510H135M145 180V510" />
-              <text className="rc-label rc-label-one" x="270" y="292">SLAB S1</text>
-              <text className="rc-label rc-label-two" x="492" y="390">BEAM B2</text>
-              <text className="rc-label rc-label-three" x="410" y="102">5,650</text>
-              <text className="rc-label rc-label-four" x="105" y="355">3,300</text>
-            </svg>
+            <div className="signature-rc-meta"><b>RC-CAD / STRUCTURAL AUTOMATION</b><span>GRID A–D · LEVEL 03 · REV. 08</span></div>
             <div className="signature-rc-sequence"><span>LINE</span><span>WALL</span><span>BEAM</span><span>SLAB</span><span>LABEL</span><span>DIMENSION</span><span>QUANTITY</span></div>
-            <div className="signature-rc-quantity"><small>AUTO QUANTITY</small><p><span>WALL</span><b>128.40 m²</b></p><p><span>BEAM</span><b>42.80 m</b></p><p><span>SLAB</span><b>86.25 m²</b></p><strong>TOTAL / 257.45</strong></div>
+            <div className="signature-rc-camera">
+              <div className="signature-rc-crosshair"><i /><i /><b /></div>
+              <svg className="signature-rc-drawing" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
+                <g className="rc-axis">
+                  <path pathLength="1" d="M105 150H965M105 650H965M160 98V700M925 98V700M340 115V685M560 115V685M780 115V685M125 280H950M125 430H950M125 585H950" />
+                  <path pathLength="1" d="M160 132v36m-18-18h36M340 132v36m-18-18h36M560 132v36m-18-18h36M780 132v36m-18-18h36M925 132v36m-18-18h36" />
+                </g>
+                <path className="rc-column" pathLength="1" d="M145 265H175V295H145ZM325 265H355V295H325ZM545 265H575V295H545ZM765 265H795V295H765ZM910 265H940V295H910ZM145 415H175V445H145ZM325 415H355V445H325ZM545 415H575V445H545ZM765 415H795V445H765ZM910 415H940V445H910ZM145 570H175V600H145ZM325 570H355V600H325ZM545 570H575V600H545ZM765 570H795V600H765ZM910 570H940V600H910Z" />
+                <path className="rc-wall" pathLength="1" d="M160 205H925V635H160ZM181 226H904V614H181ZM340 226V614M361 226V614M560 226V614M581 226V614M780 226V614M801 226V614M181 430H904M181 451H904" />
+                <path className="rc-beam" pathLength="1" d="M181 280H904M181 300H904M181 585H904M181 605H904M340 226V614M360 226V614M560 226V614M580 226V614M780 226V614M800 226V614" />
+                <path className="rc-slab" pathLength="1" d="M196 315H325V414H196ZM376 315H545V414H376ZM596 315H765V414H596ZM816 315H889V414H816ZM196 466H325V565H196ZM376 466H545V565H376ZM596 466H765V565H596ZM816 466H889V565H816Z" />
+                <path className="rc-opening" pathLength="1" d="M410 335H510V392H410ZM625 486H730V544H625ZM422 347l76 33M422 360l54 23M637 498l80 34M637 512l57 24" />
+                <path className="rc-dimension" pathLength="1" d="M160 184V166M340 184V166M560 184V166M780 184V166M925 184V166M160 174H925M160 166l10 8-10 8M340 166l-10 8 10 8M340 166l10 8-10 8M560 166l-10 8 10 8M560 166l10 8-10 8M780 166l-10 8 10 8M780 166l10 8-10 8M925 166l-10 8 10 8M142 205H116M142 430H116M142 635H116M126 205V635" />
+                <path className="rc-data-link rc-data-link-one" pathLength="1" d="M790 350H1010" /><path className="rc-data-link rc-data-link-two" pathLength="1" d="M790 505H1010" /><path className="rc-data-link rc-data-link-three" pathLength="1" d="M925 585H1010" />
+                <g className="rc-node"><circle cx="790" cy="350" r="5" /><circle cx="790" cy="505" r="5" /><circle cx="925" cy="585" r="5" /><circle cx="1010" cy="350" r="5" /><circle cx="1010" cy="505" r="5" /><circle cx="1010" cy="585" r="5" /></g>
+                <g className="rc-label">
+                  <text x="215" y="345">SLAB S1</text><text x="395" y="345">OPENING O1</text><text x="615" y="345">BEAM B2</text><text x="215" y="496">WALL W3</text><text x="615" y="496">OPENING O2</text>
+                  <text x="236" y="164">3,600</text><text x="448" y="164">4,200</text><text x="668" y="164">4,200</text><text x="840" y="164">2,900</text><text x="95" y="438" transform="rotate(-90 95 438)">8,600</text>
+                </g>
+              </svg>
+              <div className="signature-rc-scan"><span>ELEMENT DETECTION</span></div>
+              <div className="signature-rc-command"><small>COMMAND STREAM</small><p><b>01</b><span>_GRID / A-D</span><em>LOCKED</em></p><p><b>02</b><span>_STRUCTURE / LEVEL 03</span><em>BUILT</em></p><p><b>03</b><span>_TAKEOFF / LIVE</span><em>SYNC</em></p></div>
+              <div className="signature-rc-quantity"><div><small>AUTO QUANTITY</small><b>LIVE / REV.08</b></div><p><span>COLUMN</span><b>15 EA</b><i><em /></i></p><p><span>WALL</span><b>128.40 m²</b><i><em /></i></p><p><span>BEAM</span><b>42.80 m</b><i><em /></i></p><p><span>SLAB</span><b>86.25 m²</b><i><em /></i></p><strong><span>TOTAL QUANTITY</span>273.45</strong></div>
+            </div>
             <div className="signature-rc-copy"><p>반복 명령은 프로그램이</p><p>검토와 판단은 사람이</p></div>
           </div>
           <div className="grid gap-12 lg:grid-cols-[1.04fr_.96fr] lg:items-start">
@@ -1397,12 +1409,16 @@ export default function Home() {
 
         <section id="brand-end" data-signature-scene className="presentation-scene brand-end-scene relative grid overflow-hidden bg-[#0c1724] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-label="CONCOST 브랜드 엔드카드">
           <div aria-hidden="true" className="signature-ending">
-            <div className="ending-object ending-object-excel"><Grid3X3 /><span>EXCEL CELL</span></div>
-            <div className="ending-object ending-object-cad"><Route /><span>CAD LINE</span></div>
-            <div className="ending-object ending-object-groupware"><FolderKanban /><span>GROUPWARE</span></div>
-            <div className="ending-object ending-object-message"><MessageSquareText /><span>MESSENGER</span></div>
-            <div className="ending-object ending-object-claim"><FileText /><span>CLAIM</span></div>
-            <div className="ending-object ending-object-browser"><Network /><span>WEB BROWSER</span></div>
+            <div className="ending-stage-meta"><b>CONCOST / SHARED OPERATING ASSETS</b><span>06 INPUTS · 01 STANDARD · 01 DECISION FLOW</span></div>
+            <svg className="ending-flow-map" viewBox="0 0 1440 800" preserveAspectRatio="none"><path className="ending-flow-base" pathLength="1" d="M210 230H720H1230V565H720H210V230M720 230V565" /><path className="ending-flow-pulse" pathLength="1" d="M210 230H720H1230V565H720H210V230M720 230V565" /></svg>
+            <div className="ending-core-lock"><small>ONE SHARED STANDARD</small><b>INPUT → SYSTEM → DECISION</b></div>
+            <div className="ending-object ending-object-excel"><div className="ending-object-head"><Grid3X3 /><span>EXCEL CELL</span><b>01</b></div><div className="ending-object-preview ending-preview-excel">{Array.from({ length: 24 }).map((_, index) => <i key={index}>{index === 7 ? "128.40" : index === 14 ? "42.80" : ""}</i>)}</div></div>
+            <div className="ending-object ending-object-cad"><div className="ending-object-head"><Route /><span>CAD LINE</span><b>02</b></div><div className="ending-object-preview ending-preview-cad"><svg viewBox="0 0 240 90"><path d="M10 16H230M10 74H230M35 5V84M205 5V84M35 24H205V68H35ZM92 24V68M150 24V68M35 46H205" /><circle cx="92" cy="46" r="3" /><circle cx="150" cy="46" r="3" /></svg></div></div>
+            <div className="ending-object ending-object-groupware"><div className="ending-object-head"><FolderKanban /><span>GROUPWARE</span><b>03</b></div><div className="ending-object-preview ending-preview-image"><img src={manusAsset("groupware-dashboard_c4f7d7ee.png")} alt="" /></div></div>
+            <div className="ending-object ending-object-message"><div className="ending-object-head"><MessageSquareText /><span>MESSENGER</span><b>04</b></div><div className="ending-object-preview ending-preview-image"><img src={manusAsset("messenger-ui_25d14687.png")} alt="" /></div></div>
+            <div className="ending-object ending-object-claim"><div className="ending-object-head"><FileText /><span>CLAIM DOCUMENT</span><b>05</b></div><div className="ending-object-preview ending-preview-claim"><small>CLAIM / REV.03</small><i /><i /><i /><strong>APPROVED</strong></div></div>
+            <div className="ending-object ending-object-browser"><div className="ending-object-head"><Network /><span>WEB BROWSER</span><b>06</b></div><div className="ending-object-preview ending-preview-image"><img src={manusAsset("concost-site.png")} alt="" /></div></div>
+            <div className="ending-stage-caption"><small>EVERY WORK OBJECT</small><b>하나의 업무 흐름으로 수렴합니다.</b></div>
             <i className="ending-compression-line" />
             <div className="ending-blackout" />
           </div>
