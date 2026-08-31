@@ -943,18 +943,71 @@ export default function Home() {
         <section id="hero" data-signature-scene className="presentation-scene relative mx-auto max-w-[1440px] border-x border-[#101c2c]/10 lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-labelledby="hero-title">
           <div aria-hidden="true" className="signature-opening">
             <div className="signature-opening-camera">
-              <div className="signature-opening-crosshair"><i /><i /><b /></div>
-              <svg className="signature-opening-drawing" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
-                <path pathLength="1" d="M105 150H1095M105 350H1095M105 550H1095M210 90V610M470 90V610M760 90V610M1010 90V610" />
-                <path pathLength="1" d="M210 150L470 350L760 150L1010 350L760 550L470 350L210 550" />
-                <path pathLength="1" d="M310 246H650V470H910V260H650V150" />
+              <div className="signature-opening-meta opening-meta-left">
+                <b>CONCOST / SYSTEM BLUEPRINT</b>
+                <span>STRUCTURE · QUANTITY · WORKFLOW</span>
+              </div>
+              <div className="signature-opening-meta opening-meta-right">
+                <b>COORD / 127.0286 · 37.4981</b>
+                <span>MODEL SYNC / READY</span>
+              </div>
+              <div className="signature-opening-frame">
+                <i /><i /><i /><i />
+              </div>
+              <div className="signature-opening-crosshair"><i /><i /><b /><em /></div>
+              <svg className="signature-opening-drawing" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
+                <g className="opening-axis">
+                  <path pathLength="1" d="M126 164H1314M126 644H1314M234 96V704M1210 96V704" />
+                  <path pathLength="1" d="M222 150v28m-14-14h28M518 150v28m-14-14h28M823 150v28m-14-14h28M1118 150v28m-14-14h28M222 630v28m-14-14h28M518 630v28m-14-14h28M823 630v28m-14-14h28M1118 630v28m-14-14h28" />
+                </g>
+                <g className="opening-structure">
+                  <path pathLength="1" d="M222 228H1118V568H222ZM242 248H1098V548H242Z" />
+                  <path pathLength="1" d="M518 248V548M538 248V548M823 248V548M843 248V548M242 378H1098M242 398H1098" />
+                  <path pathLength="1" d="M300 286H450V348H300ZM600 286H760V348H600ZM902 286H1040V348H902ZM300 438H450V510H300ZM600 438H760V510H600ZM902 438H1040V510H902Z" />
+                </g>
+                <g className="opening-slab">
+                  <path pathLength="1" d="M258 264H502V362H258ZM554 264H807V362H554ZM859 264H1082V362H859ZM258 414H502V532H258ZM554 414H807V532H554ZM859 414H1082V532H859Z" />
+                </g>
+                <g className="opening-dimension">
+                  <path pathLength="1" d="M222 202V178M518 202V178M823 202V178M1118 202V178M222 188H1118M209 228H178M209 398H178M209 568H178M190 228V568" />
+                  <path pathLength="1" d="M222 180l10 8-10 8M518 180l-10 8 10 8M518 180l10 8-10 8M823 180l-10 8 10 8M823 180l10 8-10 8M1118 180l-10 8 10 8M182 228l8 10 8-10M182 568l8-10 8 10" />
+                </g>
+                <g className="opening-label">
+                  <text x="354" y="181">6,000</text><text x="660" y="181">6,200</text><text x="958" y="181">5,800</text>
+                  <text x="151" y="404" transform="rotate(-90 151 404)">7,200</text>
+                  <text x="278" y="281">S1 / OFFICE</text><text x="574" y="281">S2 / CORE</text><text x="879" y="281">S3 / SERVICE</text>
+                  <text x="278" y="431">B1 / WORK ZONE</text><text x="574" y="431">B2 / REVIEW</text><text x="879" y="431">B3 / APPROVAL</text>
+                </g>
               </svg>
+              <div className="signature-opening-scan"><span>LIVE TAKE-OFF</span></div>
               <div className="signature-opening-sheet">
-                {Array.from({ length: 30 }).map((_, index) => <i key={index}>{index % 7 === 0 ? (1240 + index * 37).toLocaleString() : ""}</i>)}
-                <strong>QTY / 48,620</strong>
+                <div className="opening-sheet-head"><span>QUANTITY / LIVE TAKE-OFF</span><b>SYNC 01</b></div>
+                <div className="opening-sheet-row"><span>WALL</span><small>128.40 m²</small><b>100%</b></div>
+                <div className="opening-sheet-row"><span>BEAM</span><small>42.80 m</small><b>100%</b></div>
+                <div className="opening-sheet-row"><span>SLAB</span><small>86.25 m²</small><b>100%</b></div>
+                <div className="opening-sheet-row"><span>FORM</span><small>257.45 m²</small><b>100%</b></div>
+                <strong>TOTAL / 48,620</strong>
               </div>
               <div className="signature-opening-ui">
-                <span>CONCOST / OPERATING GRID</span><i /><i /><i /><i /><i /><i />
+                <div className="opening-ui-head"><span>CONCOST / OPERATING SYSTEM</span><b>ALL SYSTEMS CONNECTED</b></div>
+                <div className="opening-ui-rail"><i /><i /><i /><i /><i /><i /></div>
+                <div className="opening-ui-main">
+                  <div className="opening-ui-title"><small>SHARED OPERATING GRID</small><b>흐름과 이력을 하나의 시스템으로</b></div>
+                  <div className="opening-ui-metrics">
+                    <div><small>PROJECT FLOW</small><b>72%</b><i><span /></i></div>
+                    <div><small>APPROVAL</small><b>48 / 52</b><i><span /></i></div>
+                    <div><small>REVISION</small><b>03 LIVE</b><i><span /></i></div>
+                  </div>
+                  <div className="opening-ui-workflow">
+                    <small>LIVE WORKFLOW</small>
+                    <p><b>01</b><span>현업 데이터 수집</span><em>COMPLETE</em></p>
+                    <p><b>02</b><span>수량 · 문서 자동 연결</span><em>SYNCED</em></p>
+                    <p><b>03</b><span>검토와 승인 이력 관리</span><em>READY</em></p>
+                  </div>
+                  <div className="opening-ui-quantity">
+                    <small>LIVE QUANTITY</small><b>48,620</b><span>CAD → DATA → DECISION</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
