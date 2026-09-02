@@ -1767,7 +1767,7 @@ img.asset-fallback {
   .proof-process-rail { align-items:center; display:flex; left:6%; opacity:0; position:absolute; right:6%; top:3.6%; z-index:35; }.proof-process-rail span { color:#78979a; font-size:10px; font-weight:900; letter-spacing:.12em; white-space:nowrap; }.proof-process-rail i { background:rgba(66,213,206,.28); height:1px; margin:0 14px; position:relative; width:100%; }.proof-process-rail i::after { background:#42d5ce; content:""; height:5px; position:absolute; right:0; top:-2px; width:5px; }.roadmap-product-proof-playing .proof-process-rail { animation:proof-rail-story 16520ms cubic-bezier(.23,1,.32,1) 450ms both; }
 
   .roadmap-product-proof-settled .roadmap-product-proof { background:#e7edf5; opacity:1; }.roadmap-product-proof-settled .proof-scene:not(.proof-scene-qc),.roadmap-product-proof-settled .proof-entry-bridge,.roadmap-product-proof-settled .proof-process-rail { display:none; }.roadmap-product-proof-settled .proof-scene-qc,.roadmap-product-proof-settled .proof-copy-qc { opacity:1; transform:none; }.roadmap-product-proof-settled .proof-app-frame-qc { transform:translate(-50%,-50%); }.roadmap-product-proof-settled .proof-qc-steps i { opacity:0; transform:none; }.roadmap-product-proof-settled .proof-qc-steps i:last-child { opacity:1; }
-  .presentation-mode #roadmap.roadmap-content-revealing .roadmap-product-proof { animation:proof-overlay-land-out 1100ms cubic-bezier(.77,0,.175,1) both; }.presentation-mode #roadmap.roadmap-content-revealing .proof-app-frame-qc { animation:proof-qc-land 1050ms cubic-bezier(.77,0,.175,1) both; }.presentation-mode #roadmap.roadmap-content-revealing .proof-copy-qc { animation:proof-copy-land-out 520ms cubic-bezier(.77,0,.175,1) both; }
+  .presentation-mode #roadmap.roadmap-content-revealing .roadmap-product-proof { animation:proof-overlay-land-out 1850ms cubic-bezier(.77,0,.175,1) both; }.presentation-mode #roadmap.roadmap-content-revealing .proof-scene-qc { animation:proof-qc-stage-clear 1850ms cubic-bezier(.77,0,.175,1) both; }.presentation-mode #roadmap.roadmap-content-revealing .proof-app-frame-qc { animation:proof-qc-land 1780ms cubic-bezier(.77,0,.175,1) both; }.presentation-mode #roadmap.roadmap-content-revealing .proof-copy-qc { animation:proof-copy-land-out 680ms cubic-bezier(.77,0,.175,1) both; }
   .presentation-mode #roadmap.roadmap-content-revealed .roadmap-product-proof { display:none; }
   .roadmap-qc-privacy-mask { background:#101c2c; bottom:0; height:13%; left:0; position:absolute; width:20%; z-index:1; }.roadmap-draft > .absolute.inset-x-0 { z-index:6; }.roadmap-qc-image { filter:saturate(.88) contrast(1.02); }
 
@@ -1874,8 +1874,11 @@ img.asset-fallback {
   .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-drawing .rc-node circle { animation:none !important; opacity:1; r:5px; }
   .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-quantity p i em { animation:none !important; transform:scaleX(1); }
   .presentation-mode #roadmap.roadmap-content-revealing .signature-rc-cad { animation:signature-rc-content-exit 1000ms cubic-bezier(.77,0,.175,1) both; transform-origin:center; }
-  .presentation-mode #roadmap.roadmap-content-revealing > .grid,
-  .presentation-mode #roadmap.roadmap-content-revealing > .relative { animation:signature-roadmap-content-in 900ms cubic-bezier(.23,1,.32,1) 180ms both; }
+  .presentation-mode #roadmap.roadmap-content-revealing > .grid { opacity:1; }
+  .presentation-mode #roadmap.roadmap-content-revealing > .grid > div:first-child { animation:roadmap-copy-bridge-in 900ms cubic-bezier(.23,1,.32,1) 560ms both; }
+  .presentation-mode #roadmap.roadmap-content-revealing .roadmap-draft { opacity:1; }
+  .presentation-mode #roadmap.roadmap-content-revealing .roadmap-draft > * { animation:roadmap-draft-bridge-in 360ms linear 1420ms both !important; }
+  .presentation-mode #roadmap.roadmap-content-revealing > .relative { animation:roadmap-stages-bridge-in 760ms cubic-bezier(.23,1,.32,1) 940ms both; }
   .presentation-mode #roadmap.roadmap-content-revealed .signature-rc-cad { display:none; }
 
   /* 05 / ENDING — six real work surfaces assemble, connect, collapse to one line, then logo and thanks hold. */
@@ -1959,11 +1962,15 @@ img.asset-fallback {
 @keyframes proof-qc-copy-in { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
 @keyframes proof-qc-step { 0% { opacity:0; transform:scaleY(.18); } 34% { opacity:1; transform:scaleY(1); } 100% { opacity:0; transform:scaleY(.62); } }
 @keyframes proof-rail-story { 0% { opacity:0; transform:translateY(-8px); } 5%,92% { opacity:1; transform:none; } 100% { opacity:0; transform:translateY(-8px); } }
-@keyframes proof-qc-land { 0% { transform:translate(-50%,-50%) scale(1); } 38% { transform:translate(-43%,-50%) scale(.86); } 100% { transform:translate(-2%,-78%) scale(.43); } }
+@keyframes proof-qc-land { 0% { clip-path:inset(0); transform:translate(-50%,-50%) scale(1); } 16% { clip-path:inset(0); transform:translate(-50%,-50%) scale(1.012); } 78%,100% { clip-path:inset(5.5% 0); transform:translate(calc(-50% + 22.56vw),calc(-50% - 21.53vh)) scale(.497); } }
+@keyframes proof-qc-stage-clear { 0% { background:#e7edf5; } 32% { background:#f3f0e9; } 52%,100% { background:transparent; } }
 @keyframes proof-copy-land-out { from { opacity:1; transform:none; } to { opacity:0; transform:translate3d(-30px,0,-80px); } }
-@keyframes proof-overlay-land-out { 0%,82% { background:#e7edf5; opacity:1; } 100% { background:transparent; opacity:0; visibility:hidden; } }
+@keyframes proof-overlay-land-out { 0% { background:#e7edf5; opacity:1; } 32% { background:#f3f0e9; opacity:1; } 52%,88% { background:rgba(243,240,233,0); opacity:1; } 100% { background:transparent; opacity:0; visibility:hidden; } }
 @keyframes signature-rc-content-exit { 0% { clip-path:inset(0); opacity:1; transform:perspective(1800px) translateZ(0) scale(1); } 58% { clip-path:inset(8% 10%); opacity:1; transform:perspective(1800px) translateZ(-260px) scale(.78); } 100% { clip-path:inset(22% 28%); opacity:0; transform:perspective(1800px) translateZ(-680px) scale(.46); visibility:hidden; } }
 @keyframes signature-roadmap-content-in { from { opacity:0; transform:translate3d(0,24px,-90px) scale(.98); } to { opacity:1; transform:translate3d(0,0,0) scale(1); } }
+@keyframes roadmap-copy-bridge-in { from { opacity:0; transform:translate3d(-28px,0,-90px) scale(.985); } to { opacity:1; transform:translate3d(0,0,0) scale(1); } }
+@keyframes roadmap-draft-bridge-in { from { opacity:0; } to { opacity:1; } }
+@keyframes roadmap-stages-bridge-in { from { opacity:0; transform:translate3d(0,28px,-70px); } to { opacity:1; transform:translate3d(0,0,0); } }
 @keyframes ending-meta-in { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:none; } }
 @keyframes ending-panel-story { 0% { opacity:0; transform:var(--ending-start) scale(.78); } 11% { opacity:1; transform:var(--ending-start) scale(.88); } 36% { opacity:1; transform:var(--ending-dock) scale(1.035); } 44%,62% { opacity:1; transform:var(--ending-dock) scale(1); } 86%,92% { opacity:1; transform:var(--ending-lock); } 100% { opacity:0; transform:translate3d(-50%,-50%,0) scaleX(.018) scaleY(.11); } }
 @keyframes ending-flow-build { 0% { opacity:0; stroke-dashoffset:1; } 18% { opacity:1; } 70% { opacity:1; stroke-dashoffset:0; } 100% { opacity:0; stroke-dashoffset:0; } }

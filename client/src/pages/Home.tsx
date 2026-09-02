@@ -497,7 +497,7 @@ function PresentationControls() {
         window.dispatchEvent(new Event("resize"));
         cinematicInputLocked.current = false;
         roadmapRevealTimer.current = null;
-      }, 1100);
+      }, 1850);
       return;
     }
     if (cinematicInputLocked.current) return;
@@ -1173,7 +1173,7 @@ export default function Home() {
             <div className="relative flex flex-col justify-between border-b border-[#101c2c]/10 px-5 pb-8 pt-12 sm:px-8 lg:border-b-0 lg:border-r lg:px-12 lg:pb-12 lg:pt-16">
               <div className="absolute inset-x-0 top-0 h-1 bg-[#00a6a6]" />
               <div>
-                <SectionKicker number="00" label="TOGETHER, WE BUILD BETTER WORK" />
+                <SectionKicker number="01" label="TOGETHER, WE BUILD BETTER WORK" />
                 <h1 id="hero-title" className="font-display mt-8 max-w-[720px] text-[clamp(2.65rem,4.35vw,4.7rem)] font-extrabold leading-[0.98] tracking-[-0.075em] text-[#101c2c]">
                   <span className="block whitespace-nowrap">모두와 함께</span>
                   <span className="block whitespace-nowrap">일하는 방식을</span>
@@ -1258,7 +1258,7 @@ export default function Home() {
           <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
             <div className="grid gap-14 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
               <div>
-                <SectionKicker number="01" label="WHY NOW" />
+                <SectionKicker number="02" label="WHY NOW" />
                 <h2 id="why-title" className="font-display mt-7 text-[clamp(2.45rem,4.4vw,4.8rem)] font-extrabold leading-[1.12] tracking-[-0.065em]">
                   업무는 이미<br /><span className="cue-underline cue-underline-sweep cue-color-amber inline-block whitespace-nowrap text-[#42d5ce]">하나로 연결되어</span><span className="cue-title-followup block">있습니다.</span>
                 </h2>
@@ -1292,7 +1292,7 @@ export default function Home() {
         <section id="build" className="presentation-scene mx-auto max-w-[1440px] border-x border-[#101c2c]/10 px-5 py-20 sm:px-8 lg:min-h-[calc(100vh-74px)] lg:snap-start lg:px-12 lg:py-20" aria-labelledby="team-title">
           <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-end">
             <div>
-              <SectionKicker number="02" label="HOW WE BUILD" />
+              <SectionKicker number="03" label="HOW WE BUILD" />
               <h2 id="team-title" className="font-display mt-7 max-w-xl text-[clamp(2.5rem,4.8vw,5.1rem)] font-extrabold leading-[.98] tracking-[-0.07em]">
                 현업의 질문을<br />
                 <span className="cue-highlight-marker cue-color-sky text-[#008b8b]">제품의 언어로</span><br />바꿉니다.
@@ -1342,7 +1342,7 @@ export default function Home() {
           <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:flex lg:min-h-[calc(100vh-114px)] lg:flex-col lg:px-12">
             <div className="grid gap-6 border-b border-[#101c2c]/15 pb-6 lg:shrink-0 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
               <div>
-                <SectionKicker number="03" label="WHAT CHANGED" />
+                <SectionKicker number="04" label="WHAT CHANGED" />
                 <h2 id="work-title" className="font-display mt-5 text-[clamp(2.35rem,4.05vw,4.4rem)] font-extrabold leading-[.98] tracking-[-0.07em]">큰 시스템보다<br /><span className="cue-underline safe-underline cue-color-coral text-[#008b8b]">매일의 불편부터.</span></h2>
               </div>
               <p data-cue className="scene-support-copy max-w-xl break-words text-[16px] leading-7 text-[#456066]">기술의 규모보다 먼저 줄인 것은 직원의 시간입니다.<br />대기·전달·검색·반복의 마찰부터 줄여 왔습니다.</p>
@@ -1380,7 +1380,7 @@ export default function Home() {
         <section id="foundation" className="presentation-scene relative overflow-hidden bg-[#101c2c] text-[#f3f0e9] lg:min-h-[calc(100vh-74px)] lg:snap-start" aria-labelledby="foundation-title">
           <div className="foundation-base mx-auto grid max-w-[1440px] lg:grid-cols-[1.1fr_.9fr]">
             <div className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-              <SectionKicker number="04" label="COMMON FOUNDATION" />
+              <SectionKicker number="05" label="COMMON FOUNDATION" />
               <h2 id="foundation-title" className="font-display mt-7 max-w-2xl text-[clamp(2.5rem,4.5vw,5rem)] font-extrabold leading-[1.12] tracking-[-0.07em]">이제 시스템이<br /><span className="whitespace-nowrap"><span className="cue-highlight-marker cue-color-lime inline-block">흐름과 이력을</span> 관리합니다.</span></h2>
               <p data-cue className="scene-support-copy mt-8 max-w-xl text-[17px] leading-8 text-[#c2d0d0]">프로젝트·업무·일정·승인·변경 이력을 하나의 흐름에 놓습니다.<br />메신저는 대화에서 업무와 기록을 시작합니다.</p>
               <div data-cue className="foundation-product-plan mt-9">
@@ -1413,7 +1413,7 @@ export default function Home() {
           <div className="showcase-content relative z-[1] mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-12 lg:pr-44 lg:py-8">
             <div className="grid gap-5 border-b border-[#101c2c]/15 pb-5 lg:grid-cols-[.84fr_1.16fr] lg:items-end">
               <div>
-                <SectionKicker number="05" label="DIGITAL PRODUCTS & CLIENT WORK" />
+                <SectionKicker number="06" label="DIGITAL PRODUCTS & CLIENT WORK" />
                 <h2 id="showcase-title" className="font-display mt-4 text-[clamp(2.05rem,3.45vw,3.55rem)] font-extrabold leading-[1] tracking-[-0.07em]"><span className="block">우리가 만든 것은</span><span className="block whitespace-nowrap">업무 기반부터 <span className="cue-highlight-marker cue-color-sky">웹사이트까지.</span></span></h2>
               </div>
               <p data-cue className="scene-support-copy max-w-2xl text-[14px] leading-6 text-[#456066] sm:text-[15px]"><span className="block whitespace-nowrap">전문 지식과 실행 경험을 자체 플랫폼으로 서비스화합니다.</span><span className="block whitespace-nowrap">같은 개발 역량으로 고객사의 브랜 드 화면까지 구현합니다.</span></p>
@@ -1503,7 +1503,7 @@ export default function Home() {
           <RoadmapProductProofSequence />
           <div className="grid gap-12 lg:grid-cols-[1.04fr_.96fr] lg:items-start">
             <div>
-              <SectionKicker number="06" label="FROM CONNECTION TO INTELLIGENCE" />
+              <SectionKicker number="07" label="FROM CONNECTION TO INTELLIGENCE" />
               <h2 id="roadmap-title" className="font-display mt-7 text-[clamp(2.5rem,4.4vw,4.8rem)] font-extrabold leading-[.98] tracking-[-0.07em]">본업의 반복을 줄이고,<br /><span className="cue-highlight-marker cue-color-violet">표준을 만듭니다.</span></h2>
                 <p data-cue className="roadmap-support-copy scene-support-copy mt-8 max-w-[540px] text-[17px] leading-8 text-[#456066]"><span className="block lg:whitespace-nowrap">RC-CAD와 전문 프로그램은 반복 입력·집계·양식 편차를 줄입니다.</span><span className="block lg:whitespace-nowrap">사람은 검토와 판단에 더 집중합니다.</span></p>
             </div>
@@ -1535,7 +1535,7 @@ export default function Home() {
           <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 lg:px-12 lg:py-10">
             <div className="grid gap-6 lg:grid-cols-[.92fr_1.08fr] lg:items-end">
               <div>
-                <SectionKicker number="07" label="WHO BENEFITS" />
+                <SectionKicker number="08" label="WHO BENEFITS" />
                 <h2 id="impact-title" className="font-display mt-5 text-[clamp(2.25rem,3.85vw,4.15rem)] font-extrabold leading-[1.12] tracking-[-0.07em]">개발의 효과는<br /><span className="whitespace-nowrap"><span className="cue-underline safe-underline cue-color-rose inline-block text-[#008b8b]">모든 부서에</span> 나타납니다.</span></h2>
               </div>
               <p data-cue className="scene-support-copy min-w-0 max-w-none break-words text-[15px] leading-7 text-[#456066]"><span className="block">각 부서가 같은 맥락에서 일하고 필요한 정보를 빠르게 확인합니다.</span><span className="block">개발의 효과는 더 나은 결정으로 이어집니다.</span></p>
