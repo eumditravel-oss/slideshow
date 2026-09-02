@@ -445,7 +445,7 @@ function PresentationControls() {
     roadmap.classList.remove("roadmap-content-revealing", "roadmap-content-revealed", "roadmap-product-proof-settled", "roadmap-proof-returned");
     roadmap.classList.add("roadmap-product-proof-playing");
     if (roadmapProofTimer.current) window.clearTimeout(roadmapProofTimer.current);
-    roadmapProofTimer.current = window.setTimeout(settleRoadmapProductProof, 12500);
+    roadmapProofTimer.current = window.setTimeout(settleRoadmapProductProof, 17500);
   };
 
   const resetRoadmapProductProof = () => {
@@ -1510,7 +1510,7 @@ export default function Home() {
             <div data-cue className="roadmap-draft relative min-h-[320px] overflow-hidden border border-[#101c2c]/15 bg-[#dfe5e0] lg:min-h-[370px]">
               <ParallaxImage src={productProofAssets.qcStudio} alt="CONCOST 기술본부 QC Studio의 프로젝트 등록과 검수 흐름" className="roadmap-qc-image h-full w-full object-cover object-top" intensity={.35} />
               <span aria-hidden="true" className="roadmap-qc-privacy-mask" />
-              <div aria-hidden="true" className="cad-draw-sequence"><i /><i /><i /><i /><i /></div>
+              <div aria-hidden="true" className="roadmap-qc-flow"><i /><i /><i /><i /><i /></div>
               <div className="absolute inset-x-0 bottom-0 bg-[#f3f0e9]/95 p-5 backdrop-blur-sm sm:p-7">
                 <p className="font-display text-xl font-extrabold tracking-[-0.045em]">반복 명령은 프로그램이, 검토와 판단은 사람이.</p>
               </div>
