@@ -1704,13 +1704,66 @@ img.asset-fallback {
 .signature-opening,
 .signature-why,
 .signature-rc-cad,
-.signature-ending { display:none; }
+.signature-ending,
+.roadmap-product-proof { display:none; }
 
 @media (min-width:1024px) and (prefers-reduced-motion:no-preference) {
   .presentation-mode .signature-opening,
   .presentation-mode .signature-why,
   .presentation-mode .signature-rc-cad,
   .presentation-mode .signature-ending { display:block; }
+
+  /* RC-CAD proof bridge — one continuous, presenter-triggered workflow rather than a screenshot gallery. */
+  .presentation-mode #roadmap.roadmap-product-proof-playing .roadmap-product-proof,
+  .presentation-mode #roadmap.roadmap-product-proof-settled .roadmap-product-proof { display:block; }
+  .presentation-mode .roadmap-product-proof { background:rgba(5,15,25,.985); color:#f3f0e9; inset:0; overflow:hidden; pointer-events:none; position:absolute; z-index:76; }
+  .presentation-mode .roadmap-product-proof::before { background-image:linear-gradient(rgba(66,213,206,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(66,213,206,.028) 1px,transparent 1px); background-size:46px 46px; content:""; inset:0; mask-image:radial-gradient(circle at center,black,transparent 88%); position:absolute; }
+  .presentation-mode #roadmap.roadmap-product-proof-playing .roadmap-product-proof { animation:proof-overlay-in 420ms cubic-bezier(.23,1,.32,1) both; }
+  .presentation-mode #roadmap.roadmap-product-proof-playing .signature-rc-cad { animation:rc-proof-handoff 920ms cubic-bezier(.77,0,.175,1) both; transform-origin:22% 20%; }
+  .presentation-mode #roadmap.roadmap-product-proof-settled .signature-rc-cad { display:none; }
+
+  .proof-entry-bridge { height:86px; left:22%; opacity:0; position:absolute; top:20%; width:86px; z-index:25; }
+  .proof-entry-bridge i,.proof-entry-bridge span { background:#f5a742; left:50%; position:absolute; top:50%; transform:translate(-50%,-50%); }.proof-entry-bridge i { height:1px; width:86px; }.proof-entry-bridge span { height:86px; width:1px; }
+  .proof-entry-bridge b { border-bottom:5px solid #f5a742; border-right:5px solid #f5a742; height:34px; left:50%; position:absolute; top:50%; transform:translate(-50%,-50%) rotate(-45deg); width:34px; }
+  .roadmap-product-proof-playing .proof-entry-bridge { animation:proof-crosshair-to-mark 1050ms cubic-bezier(.77,0,.175,1) both; }
+
+  .proof-scene { inset:0; opacity:0; overflow:hidden; position:absolute; transform-style:preserve-3d; }
+  .proof-app-frame { background:#071522; border:1px solid rgba(66,213,206,.5); box-shadow:0 38px 110px rgba(0,0,0,.38); height:min(69vh,744px); left:50%; overflow:hidden; perspective:1900px; position:absolute; top:47%; transform:translate(-50%,-50%); width:min(84vw,1450px); }
+  .proof-app-frame::before { border:1px solid rgba(66,213,206,.16); content:""; inset:10px; pointer-events:none; position:absolute; z-index:9; }
+  .proof-app-frame::after { background:linear-gradient(90deg,#f5a742 0 72px,#42d5ce 72px 210px,rgba(66,213,206,.18) 210px 100%); content:""; height:2px; left:0; position:absolute; right:0; top:0; z-index:12; }
+  .proof-screen { inset:0; overflow:hidden; position:absolute; }
+  .proof-screen-blur { filter:blur(30px) brightness(.32) saturate(.8); height:118%; inset:-9%; object-fit:cover; opacity:.7; position:absolute; width:118%; }
+  .proof-screen-image { display:block; height:100%; inset:0; object-fit:contain; object-position:center; position:absolute; width:100%; }
+  .proof-crop-titlebar .proof-screen-image { height:calc(100% + 31px); transform:translateY(-31px); }
+  .proof-focus { border:2px solid #42d5ce; box-shadow:0 0 0 1px rgba(7,21,34,.8); opacity:0; position:absolute; z-index:15; }
+  .proof-focus-file { height:12.5%; left:24.5%; top:18%; width:72%; }.proof-focus-extract { height:28%; left:24.2%; top:28%; width:72.2%; }
+  .proof-copy { bottom:5.8%; left:7%; position:absolute; text-shadow:0 8px 28px #050f19; z-index:30; }
+  .proof-copy small,.proof-fin-copy small { color:#42d5ce; display:block; font-size:clamp(18px,1.15vw,24px); font-weight:900; letter-spacing:.16em; }
+  .proof-copy h3,.proof-fin-copy h3 { font-family:"SUIT",sans-serif; font-size:clamp(3.25rem,4.1vw,5rem); font-weight:900; letter-spacing:-.065em; line-height:.98; margin-top:10px; }
+  .proof-copy p,.proof-fin-copy p { color:#c9d7d5; font-size:clamp(20px,1.35vw,28px); font-weight:700; margin-top:13px; }
+
+  .roadmap-product-proof-playing .proof-scene-cad { animation:proof-scene-story 1550ms cubic-bezier(.23,1,.32,1) 80ms both; }.roadmap-product-proof-playing .proof-scene-cad .proof-app-frame { animation:proof-camera-approach 920ms cubic-bezier(.23,1,.32,1) 100ms both; }.roadmap-product-proof-playing .proof-focus-file { animation:proof-focus-pulse 520ms cubic-bezier(.23,1,.32,1) 720ms both; }
+  .roadmap-product-proof-playing .proof-scene-schedule { animation:proof-scene-story 2850ms cubic-bezier(.23,1,.32,1) 1250ms both; }.proof-schedule-shot .proof-screen-image { height:calc(100% + 29px); transform:translateY(-29px); }.roadmap-product-proof-playing .proof-schedule-shot { animation:proof-subshot-out 1800ms cubic-bezier(.77,0,.175,1) 1250ms both; }.proof-excel-shot { background:#f4f4f2; clip-path:inset(0 49% 0 49%); opacity:0; }.proof-excel-shot .proof-screen-image { background:#f4f4f2; object-fit:cover; object-position:center 8%; transform:scale(1.04); }.roadmap-product-proof-playing .proof-excel-shot { animation:proof-grid-expand 1120ms cubic-bezier(.77,0,.175,1) 2800ms both; }.roadmap-product-proof-playing .proof-focus-extract { animation:proof-focus-pulse 580ms cubic-bezier(.23,1,.32,1) 1900ms both; }.proof-table-scan { background:linear-gradient(90deg,transparent,#42d5ce,transparent); height:2px; left:12%; opacity:0; position:absolute; top:12%; width:76%; z-index:16; }.roadmap-product-proof-playing .proof-table-scan { animation:proof-table-scan 820ms cubic-bezier(.65,0,.35,1) 3200ms both; }
+
+  .roadmap-product-proof-playing .proof-scene-mapping { animation:proof-scene-story 2350ms cubic-bezier(.23,1,.32,1) 3500ms both; }.roadmap-product-proof-playing .proof-scene-mapping .proof-copy { opacity:0; animation:proof-qc-copy-in 520ms cubic-bezier(.23,1,.32,1) 3820ms both; }.proof-mapping-result .proof-screen-image { height:calc(100% + 30px); transform:translateY(-30px); }.proof-mapping-done { opacity:0; }.roadmap-product-proof-playing .proof-mapping-done { animation:proof-dialog-lock 950ms cubic-bezier(.23,1,.32,1) 3970ms both; }.roadmap-product-proof-playing .proof-mapping-result { animation:proof-mapping-settle 1900ms cubic-bezier(.77,0,.175,1) 3970ms both; }
+  .proof-mapping-metrics { background:rgba(7,21,34,.94); border-left:3px solid #f5a742; display:flex; gap:18px; opacity:0; padding:13px 18px; position:absolute; right:5%; top:10%; z-index:20; }.proof-mapping-metrics span { color:#9bb2b2; font-size:12px; font-weight:800; }.proof-mapping-metrics b { color:#f3f0e9; font-size:16px; margin-left:5px; }.roadmap-product-proof-playing .proof-mapping-metrics { animation:proof-metrics-in 540ms cubic-bezier(.23,1,.32,1) 4550ms both; }
+
+  .roadmap-product-proof-playing .proof-scene-fin { animation:proof-fin-scene-story 4800ms cubic-bezier(.23,1,.32,1) 5550ms both; }.proof-app-frame-fin { background:#101214; height:min(68vh,734px); width:min(88vw,1510px); }.proof-fin-frame { opacity:0; }.proof-fin-frame .proof-screen-image { object-fit:contain; }.proof-fin-1-done .proof-screen-image,.proof-fin-2-done .proof-screen-image,.proof-fin-3-guide .proof-screen-image,.proof-fin-3-done .proof-screen-image { height:100%; max-width:none; object-fit:cover; object-position:left center; width:100%; }
+  .roadmap-product-proof-playing .proof-fin-1-guide { animation:proof-match-frame 760ms steps(1,end) 5560ms both; }.roadmap-product-proof-playing .proof-fin-1-done { animation:proof-match-frame 760ms steps(1,end) 6280ms both; }.roadmap-product-proof-playing .proof-fin-2-guide { animation:proof-match-frame 760ms steps(1,end) 6960ms both; }.roadmap-product-proof-playing .proof-fin-2-done { animation:proof-match-frame 760ms steps(1,end) 7640ms both; }.roadmap-product-proof-playing .proof-fin-3-guide { animation:proof-match-frame 760ms steps(1,end) 8320ms both; }.roadmap-product-proof-playing .proof-fin-3-done { animation:proof-match-frame 980ms steps(1,end) 9000ms both; }
+  .proof-fin-progress { align-items:center; display:flex; gap:10px; left:50%; position:absolute; top:4%; transform:translateX(-50%); z-index:25; }.proof-fin-progress span { align-items:center; background:#071522; border:1px solid rgba(66,213,206,.45); color:#42d5ce; display:flex; font-size:12px; font-weight:900; height:34px; justify-content:center; width:42px; }.proof-fin-progress i { background:rgba(66,213,206,.36); height:1px; width:74px; }
+  .proof-fin-copy { bottom:5.2%; left:7%; opacity:0; position:absolute; text-shadow:0 8px 28px #050f19; z-index:30; }.roadmap-product-proof-playing .proof-fin-copy-1 { animation:proof-copy-window 1380ms cubic-bezier(.23,1,.32,1) 5580ms both; }.roadmap-product-proof-playing .proof-fin-copy-2 { animation:proof-copy-window 1380ms cubic-bezier(.23,1,.32,1) 6960ms both; }.roadmap-product-proof-playing .proof-fin-copy-3 { animation:proof-copy-window 1740ms cubic-bezier(.23,1,.32,1) 8320ms both; }
+
+  .proof-scene-qc { background:#e7edf5; color:#101c2c; }.proof-app-frame-qc { background:#e7edf5; border-color:rgba(179,82,39,.42); height:min(76vh,820px); top:48%; width:min(88vw,1500px); }.proof-app-frame-qc::after { background:linear-gradient(90deg,#b35327 0 110px,#f5a742 110px 250px,rgba(179,82,39,.15) 250px 100%); }.proof-app-frame-qc .proof-screen-blur { filter:blur(28px) brightness(.88) saturate(.8); opacity:.6; }.proof-app-frame-qc .proof-screen-image { object-fit:cover; object-position:center top; }.proof-copy-qc { color:#101c2c; opacity:0; text-shadow:0 6px 26px rgba(231,237,245,.9); }.proof-copy-qc small { color:#b35327; }.proof-copy-qc p { color:#456066; }.roadmap-product-proof-playing .proof-copy-qc { animation:proof-qc-copy-in 620ms cubic-bezier(.23,1,.32,1) 10200ms both; }
+  .proof-qc-privacy-mask { background:#101c2c; bottom:0; height:11.5%; left:0; position:absolute; width:20%; z-index:17; }
+  .proof-qc-steps { display:grid; gap:8.1%; left:1.45%; position:absolute; top:24.5%; width:5px; z-index:18; }.proof-qc-steps i { background:#b35327; height:42px; opacity:0; transform:scaleY(.18); transform-origin:center; width:4px; }.roadmap-product-proof-playing .proof-qc-steps i { animation:proof-qc-step 390ms cubic-bezier(.23,1,.32,1) both; }.roadmap-product-proof-playing .proof-qc-steps i:nth-child(1) { animation-delay:10400ms; }.roadmap-product-proof-playing .proof-qc-steps i:nth-child(2) { animation-delay:10630ms; }.roadmap-product-proof-playing .proof-qc-steps i:nth-child(3) { animation-delay:10860ms; }.roadmap-product-proof-playing .proof-qc-steps i:nth-child(4) { animation-delay:11090ms; }.roadmap-product-proof-playing .proof-qc-steps i:nth-child(5) { animation-delay:11320ms; }
+  .roadmap-product-proof-playing .proof-scene-qc { animation:proof-qc-enter 3250ms cubic-bezier(.77,0,.175,1) 9250ms both; }.roadmap-product-proof-playing .proof-app-frame-qc { animation:proof-qc-camera 1600ms cubic-bezier(.23,1,.32,1) 9320ms both; }
+
+  .proof-process-rail { align-items:center; display:flex; left:6%; opacity:0; position:absolute; right:6%; top:3.6%; z-index:35; }.proof-process-rail span { color:#78979a; font-size:10px; font-weight:900; letter-spacing:.12em; white-space:nowrap; }.proof-process-rail i { background:rgba(66,213,206,.28); height:1px; margin:0 14px; position:relative; width:100%; }.proof-process-rail i::after { background:#42d5ce; content:""; height:5px; position:absolute; right:0; top:-2px; width:5px; }.roadmap-product-proof-playing .proof-process-rail { animation:proof-rail-story 11800ms cubic-bezier(.23,1,.32,1) 320ms both; }
+
+  .roadmap-product-proof-settled .roadmap-product-proof { background:#e7edf5; opacity:1; }.roadmap-product-proof-settled .proof-scene:not(.proof-scene-qc),.roadmap-product-proof-settled .proof-entry-bridge,.roadmap-product-proof-settled .proof-process-rail { display:none; }.roadmap-product-proof-settled .proof-scene-qc,.roadmap-product-proof-settled .proof-copy-qc { opacity:1; transform:none; }.roadmap-product-proof-settled .proof-app-frame-qc { transform:translate(-50%,-50%); }.roadmap-product-proof-settled .proof-qc-steps i { opacity:0; transform:none; }.roadmap-product-proof-settled .proof-qc-steps i:last-child { opacity:1; }
+  .presentation-mode #roadmap.roadmap-content-revealing .roadmap-product-proof { animation:proof-overlay-land-out 1100ms cubic-bezier(.77,0,.175,1) both; }.presentation-mode #roadmap.roadmap-content-revealing .proof-app-frame-qc { animation:proof-qc-land 1050ms cubic-bezier(.77,0,.175,1) both; }.presentation-mode #roadmap.roadmap-content-revealing .proof-copy-qc { animation:proof-copy-land-out 520ms cubic-bezier(.77,0,.175,1) both; }
+  .presentation-mode #roadmap.roadmap-content-revealed .roadmap-product-proof { display:none; }
+  .roadmap-qc-privacy-mask { background:#101c2c; bottom:0; height:13%; left:0; position:absolute; width:20%; z-index:1; }.roadmap-draft > .absolute.inset-x-0 { z-index:6; }.roadmap-qc-image { filter:saturate(.88) contrast(1.02); }
 
   /* 01 / OPENING — precision blueprint boot → live take-off → operating UI → pull-out. */
   .presentation-mode .signature-opening { background:radial-gradient(circle at 50% 46%,#102a3a 0,#071522 58%,#050f19 100%); inset:0; overflow:hidden; pointer-events:none; position:absolute; z-index:70; }
@@ -1799,6 +1852,21 @@ img.asset-fallback {
   .presentation-mode #roadmap[data-signature-state="running"] .signature-rc-command p { animation:rc-command-in 360ms cubic-bezier(.23,1,.32,1) both; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-command p:nth-of-type(1) { animation-delay:620ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-command p:nth-of-type(2) { animation-delay:1720ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-command p:nth-of-type(3) { animation-delay:3420ms; }
   .presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p { animation:rc-quantity-row 430ms cubic-bezier(.23,1,.32,1) both; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p:nth-of-type(1) { animation-delay:3700ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p:nth-of-type(2) { animation-delay:3940ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p:nth-of-type(3) { animation-delay:4180ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p:nth-of-type(4) { animation-delay:4420ms; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity p i em { animation:rc-bar-fill 620ms cubic-bezier(.23,1,.32,1) 4480ms both; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-quantity strong { animation:rc-total-lock 520ms cubic-bezier(.23,1,.32,1) 4800ms both; }
   .presentation-mode #roadmap[data-signature-state="running"] .signature-rc-copy p:first-child { animation:rc-copy-rise 560ms cubic-bezier(.23,1,.32,1) 5300ms both; }.presentation-mode #roadmap[data-signature-state="running"] .signature-rc-copy p:last-child { animation:rc-copy-rise 560ms cubic-bezier(.23,1,.32,1) 5920ms both; }
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-cad { display:block; }
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-camera { animation:none !important; opacity:.38; transform:translate3d(-3%,0,-180px) scale(.92); }
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-meta,
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-sequence span,
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-crosshair,
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-drawing path,
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-drawing text,
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-command p,
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-quantity p,
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-quantity strong,
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-copy p { animation:none !important; opacity:1; transform:none; }
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-sequence span { color:#42d5ce; }
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-drawing path { stroke-dashoffset:0; }
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-drawing .rc-node circle { animation:none !important; opacity:1; r:5px; }
+  .presentation-mode #roadmap.roadmap-proof-returned .signature-rc-quantity p i em { animation:none !important; transform:scaleX(1); }
   .presentation-mode #roadmap.roadmap-content-revealing .signature-rc-cad { animation:signature-rc-content-exit 1000ms cubic-bezier(.77,0,.175,1) both; transform-origin:center; }
   .presentation-mode #roadmap.roadmap-content-revealing > .grid,
   .presentation-mode #roadmap.roadmap-content-revealing > .relative { animation:signature-roadmap-content-in 900ms cubic-bezier(.23,1,.32,1) 180ms both; }
@@ -1865,6 +1933,29 @@ img.asset-fallback {
 @keyframes rc-bar-fill { from { transform:scaleX(0); } to { transform:scaleX(1); } }
 @keyframes rc-total-lock { 0% { opacity:0; transform:scaleX(.22); transform-origin:right; } 72% { opacity:1; transform:scaleX(1.025); transform-origin:right; } 100% { opacity:1; transform:scaleX(1); transform-origin:right; } }
 @keyframes rc-copy-rise { 0% { opacity:0; transform:translateY(24px) scale(.98); } 78% { opacity:1; transform:translateY(-2px) scale(1.005); } 100% { opacity:1; transform:none; } }
+@keyframes proof-overlay-in { from { opacity:0; } to { opacity:1; } }
+@keyframes rc-proof-handoff { 0% { filter:none; opacity:1; transform:scale(1); } 42% { filter:brightness(.72); opacity:1; transform:scale(1.015); } 100% { filter:brightness(.35); opacity:0; transform:translate3d(-18%,0,-420px) scale(.74); visibility:hidden; } }
+@keyframes proof-crosshair-to-mark { 0% { opacity:.8; transform:translate(0,0) scale(1); } 42% { opacity:1; transform:translate(24vw,9vh) scale(.65); } 72% { opacity:1; transform:translate(24vw,9vh) scale(.65) rotate(90deg); } 100% { opacity:0; transform:translate(24vw,9vh) scale(4.4) rotate(90deg); } }
+@keyframes proof-scene-story { 0% { opacity:0; transform:translate3d(6%,0,-140px) scale(.97); } 9% { opacity:1; transform:translate3d(0,0,0) scale(1); } 84% { opacity:1; transform:translate3d(0,0,0) scale(1); } 100% { opacity:0; transform:translate3d(-6%,0,-160px) scale(.95); visibility:hidden; } }
+@keyframes proof-fin-scene-story { 0% { opacity:0; transform:translate3d(6%,0,-140px) scale(.97); } 7% { opacity:1; transform:translate3d(0,0,0) scale(1); } 92% { opacity:1; transform:translate3d(0,0,0) scale(1); } 100% { opacity:0; transform:translate3d(-4%,0,-120px) scale(.97); visibility:hidden; } }
+@keyframes proof-camera-approach { 0% { opacity:0; transform:translate3d(-50%,-50%,-220px) rotateY(-5deg) scale(.92); } 72% { opacity:1; transform:translate3d(-50%,-50%,14px) rotateY(.25deg) scale(1.006); } 100% { opacity:1; transform:translate3d(-50%,-50%,0) rotateY(0) scale(1); } }
+@keyframes proof-focus-pulse { 0% { opacity:0; transform:scale(.94); } 38% { opacity:1; transform:scale(1.012); } 100% { opacity:0; transform:scale(1); } }
+@keyframes proof-subshot-out { 0%,70% { opacity:1; transform:scale(1); } 100% { opacity:0; transform:scale(1.08); } }
+@keyframes proof-grid-expand { 0% { clip-path:inset(0 49%); opacity:0; transform:scale(.92); } 58% { clip-path:inset(0); opacity:1; transform:scale(1.012); } 100% { clip-path:inset(0); opacity:1; transform:scale(1); } }
+@keyframes proof-table-scan { 0% { opacity:0; top:12%; } 15% { opacity:1; } 82% { opacity:1; } 100% { opacity:0; top:88%; } }
+@keyframes proof-dialog-lock { 0% { opacity:0; transform:scale(.82); } 42% { opacity:1; transform:scale(1.015); } 78% { opacity:1; transform:scale(1); } 100% { opacity:0; transform:scale(.94); } }
+@keyframes proof-mapping-settle { 0%,44% { filter:brightness(.42); opacity:.55; transform:scale(1.03); } 76%,100% { filter:none; opacity:1; transform:scale(1); } }
+@keyframes proof-metrics-in { from { opacity:0; transform:translateX(22px); } to { opacity:1; transform:none; } }
+@keyframes proof-match-frame { 0% { opacity:0; } 5%,94% { opacity:1; } 100% { opacity:0; } }
+@keyframes proof-copy-window { 0% { opacity:0; transform:translateY(16px); } 16%,80% { opacity:1; transform:none; } 100% { opacity:0; transform:translateY(-10px); } }
+@keyframes proof-qc-enter { 0% { background:#f3f0e9; opacity:0; transform:translate3d(7%,0,-160px); } 28% { opacity:1; } 100% { background:#e7edf5; opacity:1; transform:none; } }
+@keyframes proof-qc-camera { 0% { opacity:0; transform:translate3d(-50%,-50%,-200px) scale(.86); } 72% { opacity:1; transform:translate3d(-50%,-50%,12px) scale(1.008); } 100% { opacity:1; transform:translate3d(-50%,-50%,0) scale(1); } }
+@keyframes proof-qc-copy-in { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+@keyframes proof-qc-step { 0% { opacity:0; transform:scaleY(.18); } 34% { opacity:1; transform:scaleY(1); } 100% { opacity:0; transform:scaleY(.62); } }
+@keyframes proof-rail-story { 0% { opacity:0; transform:translateY(-8px); } 5%,92% { opacity:1; transform:none; } 100% { opacity:0; transform:translateY(-8px); } }
+@keyframes proof-qc-land { 0% { transform:translate(-50%,-50%) scale(1); } 38% { transform:translate(-43%,-50%) scale(.86); } 100% { transform:translate(-2%,-78%) scale(.43); } }
+@keyframes proof-copy-land-out { from { opacity:1; transform:none; } to { opacity:0; transform:translate3d(-30px,0,-80px); } }
+@keyframes proof-overlay-land-out { 0%,82% { background:#e7edf5; opacity:1; } 100% { background:transparent; opacity:0; visibility:hidden; } }
 @keyframes signature-rc-content-exit { 0% { clip-path:inset(0); opacity:1; transform:perspective(1800px) translateZ(0) scale(1); } 58% { clip-path:inset(8% 10%); opacity:1; transform:perspective(1800px) translateZ(-260px) scale(.78); } 100% { clip-path:inset(22% 28%); opacity:0; transform:perspective(1800px) translateZ(-680px) scale(.46); visibility:hidden; } }
 @keyframes signature-roadmap-content-in { from { opacity:0; transform:translate3d(0,24px,-90px) scale(.98); } to { opacity:1; transform:translate3d(0,0,0) scale(1); } }
 @keyframes ending-meta-in { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:none; } }

@@ -29,6 +29,20 @@ const manusAsset = (fileName: string) =>
 const flowSteps = ["베트남 산출", "한국 검토", "내역 작성·납품", "건설사 질의·대응"];
 const claimCenterEndFrameSrc = manusAsset("CONCOST_Claim_Center_EndFrame_aa68c5a5.png");
 const claimCenterVideoSrc = manusAsset("CONCOST_Claim_Center_Studio_Cinematic_v2_72eac200.mp4");
+const productProofAssets = {
+  cadCleaner: manusAsset("concost-studio-cad-cleaner.png"),
+  schedule: manusAsset("concost-studio-schedule-extractor.png"),
+  excel: manusAsset("concost-studio-excel-output.png"),
+  mappingDone: manusAsset("concost-studio-hw-mapping-done.png"),
+  mappingResult: manusAsset("concost-studio-hw-mapping-result.png"),
+  finStep1Guide: manusAsset("concost-studio-fin-step1-guide.png"),
+  finStep1Done: manusAsset("concost-studio-fin-step1-done.png"),
+  finStep2Guide: manusAsset("concost-studio-fin-step2-guide.png"),
+  finStep2Done: manusAsset("concost-studio-fin-step2-done.png"),
+  finStep3Guide: manusAsset("concost-studio-fin-step3-guide.png"),
+  finStep3Done: manusAsset("concost-studio-fin-step3-done.png"),
+  qcStudio: manusAsset("concost-qc-studio-project-select.png"),
+};
 
 const dailyImprovements = [
   {
@@ -153,6 +167,7 @@ const presentationImageSources = [
   manusAsset("concost-site.png"),
   manusAsset("devlab-roadmap_a1fcd200.jpg"),
   manusAsset("concost-logo_747fe330.png"),
+  ...Object.values(productProofAssets),
 ];
 
 const presentationStageTones: Record<string, string> = {
@@ -200,6 +215,76 @@ function ParallaxImage({
   );
 }
 
+function ProofScreen({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+  return (
+    <div className={`proof-screen ${className}`}>
+      <img className="proof-screen-blur" src={src} alt="" aria-hidden="true" />
+      <img className="proof-screen-image" src={src} alt={alt} />
+    </div>
+  );
+}
+
+function RoadmapProductProofSequence() {
+  const finFrames = [
+    [productProofAssets.finStep1Guide, "FIN 고유 아이템 생성 안내", "proof-fin-1-guide"],
+    [productProofAssets.finStep1Done, "FIN 고유 아이템 생성 완료", "proof-fin-1-done"],
+    [productProofAssets.finStep2Guide, "FIN 하드웨어 세트 생성 안내", "proof-fin-2-guide"],
+    [productProofAssets.finStep2Done, "FIN 하드웨어 세트 생성 완료", "proof-fin-2-done"],
+    [productProofAssets.finStep3Guide, "FIN 부자재 자동산출 안내", "proof-fin-3-guide"],
+    [productProofAssets.finStep3Done, "FIN 부자재 자동산출 완료", "proof-fin-3-done"],
+  ] as const;
+
+  return (
+    <div className="roadmap-product-proof" aria-label="CONCOST Studio 실제 업무 자동화 시퀀스">
+      <div aria-hidden="true" className="proof-entry-bridge"><i /><span /><b /></div>
+
+      <div className="proof-scene proof-scene-cad">
+        <div className="proof-app-frame proof-app-frame-dark"><ProofScreen src={productProofAssets.cadCleaner} alt="CONCOST Studio CAD Cleaner 화면" className="proof-crop-titlebar" /><span className="proof-focus proof-focus-file" /></div>
+        <div className="proof-copy"><small>01 / DRAWING CLEANUP</small><h3>도면을 정리하고</h3><p>불필요한 객체와 중복 요소를 정리합니다</p></div>
+      </div>
+
+      <div className="proof-scene proof-scene-schedule">
+        <div className="proof-app-frame proof-app-frame-dark">
+          <ProofScreen src={productProofAssets.schedule} alt="CONCOST Studio Schedule Extractor 화면" className="proof-schedule-shot" />
+          <ProofScreen src={productProofAssets.excel} alt="추출된 품명, 규격, 단위, 폭과 높이 Excel 데이터" className="proof-excel-shot" />
+          <span className="proof-focus proof-focus-extract" /><i className="proof-table-scan" />
+        </div>
+        <div className="proof-copy"><small>02 / SCHEDULE EXTRACTION</small><h3>규격 57종을 추출하고</h3><p>도면 정보를 표준 Excel 데이터로 전환</p></div>
+      </div>
+
+      <div className="proof-scene proof-scene-mapping">
+        <div className="proof-app-frame proof-app-frame-dark">
+          <ProofScreen src={productProofAssets.mappingResult} alt="CONCOST Studio 자재코드 매핑 결과 목록" className="proof-mapping-result" />
+          <ProofScreen src={productProofAssets.mappingDone} alt="자재코드 매핑 완료 화면" className="proof-mapping-done" />
+          <div className="proof-mapping-metrics"><span>전체 <b>114행</b></span><span>고유 <b>37</b></span><span>세트 <b>20</b></span><span>신규채번 <b>0</b></span></div>
+        </div>
+        <div className="proof-copy"><small>03 / MATERIAL MAPPING</small><h3>자재코드를 자동으로 연결하고</h3><p>일람표 데이터를 FIN 분류 체계로 매핑</p></div>
+      </div>
+
+      <div className="proof-scene proof-scene-fin">
+        <div className="proof-app-frame proof-app-frame-fin">
+          {finFrames.map(([src, alt, frameClass]) => <ProofScreen key={frameClass} src={src} alt={alt} className={`proof-fin-frame ${frameClass}`} />)}
+          <div className="proof-fin-progress"><span>01</span><i /><span>02</span><i /><span>03</span></div>
+        </div>
+        <div className="proof-fin-copy proof-fin-copy-1"><small>01 / 03</small><h3>고유 아이템 생성</h3><p>37개 항목을 FIN 분류 체계로 연결</p></div>
+        <div className="proof-fin-copy proof-fin-copy-2"><small>02 / 03</small><h3>하드웨어 세트 생성</h3><p>20개 세트 항목 자동 구성</p></div>
+        <div className="proof-fin-copy proof-fin-copy-3"><small>03 / 03</small><h3>부자재 자동산출</h3><p>세트별 부자재 입력까지 자동 연결</p></div>
+      </div>
+
+      <div className="proof-scene proof-scene-qc">
+        <div className="proof-app-frame proof-app-frame-qc">
+          <ProofScreen src={productProofAssets.qcStudio} alt="CONCOST 기술본부 QC Studio 프로젝트 등록과 5단계 검수 흐름" />
+          <span aria-hidden="true" className="proof-qc-privacy-mask" />
+          <div aria-hidden="true" className="proof-qc-steps"><i /><i /><i /><i /><i /></div>
+        </div>
+        <div className="proof-copy proof-copy-qc"><small>05 / QUALITY CONTROL</small><h3>그리고 검수 흐름까지 연결합니다</h3><p>프로젝트 등록부터 산출 결과 검토까지</p></div>
+      </div>
+
+      <div aria-hidden="true" className="proof-process-rail"><span>도면 정리</span><i /><span>규격 추출</span><i /><span>Excel</span><i /><span>자재코드</span><i /><span>FIN 자동입력</span><i /><span>QC 검수</span></div>
+    </div>
+  );
+}
+
 function PresentationControls() {
   const [active, setActive] = useState(() => {
     const requestedScene = window.location.hash.slice(1) || new URLSearchParams(window.location.search).get("scene");
@@ -216,6 +301,8 @@ function PresentationControls() {
   const cinematicInputLocked = useRef(false);
   const previousSceneId = useRef<string | null>(null);
   const claimPlaybackRef = useRef<"idle" | "playing" | "settled">("idle");
+  const roadmapProofRef = useRef<"idle" | "playing" | "settled">("idle");
+  const roadmapProofInputLocked = useRef(false);
   const cueRef = useRef(0);
   const assetsReadyRef = useRef(false);
   const stageTransitionTimer = useRef<number | null>(null);
@@ -226,6 +313,8 @@ function PresentationControls() {
   const claimPlaybackTimer = useRef<number | null>(null);
   const signatureLockTimer = useRef<number | null>(null);
   const roadmapRevealTimer = useRef<number | null>(null);
+  const roadmapProofTimer = useRef<number | null>(null);
+  const roadmapProofInputTimer = useRef<number | null>(null);
 
   const goTo = (index: number) => {
     cueRef.current = 0;
@@ -331,6 +420,46 @@ function PresentationControls() {
     else video.addEventListener("canplay", play, { once: true });
   };
 
+  const lockRoadmapProofInput = () => {
+    roadmapProofInputLocked.current = true;
+    if (roadmapProofInputTimer.current) window.clearTimeout(roadmapProofInputTimer.current);
+    roadmapProofInputTimer.current = window.setTimeout(() => {
+      roadmapProofInputLocked.current = false;
+      roadmapProofInputTimer.current = null;
+    }, 240);
+  };
+
+  const settleRoadmapProductProof = () => {
+    const roadmap = document.getElementById("roadmap");
+    if (roadmapProofTimer.current) window.clearTimeout(roadmapProofTimer.current);
+    roadmapProofTimer.current = null;
+    roadmapProofRef.current = "settled";
+    roadmap?.classList.remove("roadmap-product-proof-playing");
+    roadmap?.classList.add("roadmap-product-proof-settled");
+  };
+
+  const startRoadmapProductProof = () => {
+    const roadmap = document.getElementById("roadmap");
+    if (!roadmap || roadmapProofRef.current !== "idle") return;
+    roadmapProofRef.current = "playing";
+    roadmap.classList.remove("roadmap-content-revealing", "roadmap-content-revealed", "roadmap-product-proof-settled", "roadmap-proof-returned");
+    roadmap.classList.add("roadmap-product-proof-playing");
+    if (roadmapProofTimer.current) window.clearTimeout(roadmapProofTimer.current);
+    roadmapProofTimer.current = window.setTimeout(settleRoadmapProductProof, 12500);
+  };
+
+  const resetRoadmapProductProof = () => {
+    const roadmap = document.getElementById("roadmap");
+    if (roadmapProofTimer.current) window.clearTimeout(roadmapProofTimer.current);
+    if (roadmapProofInputTimer.current) window.clearTimeout(roadmapProofInputTimer.current);
+    roadmapProofTimer.current = null;
+    roadmapProofInputTimer.current = null;
+    roadmapProofInputLocked.current = false;
+    roadmapProofRef.current = "idle";
+    roadmap?.classList.remove("roadmap-product-proof-playing", "roadmap-product-proof-settled", "roadmap-content-revealing", "roadmap-content-revealed");
+    roadmap?.classList.add("roadmap-proof-returned");
+  };
+
   const advanceCue = () => {
     const cueElements = getCueElements();
     const cueCount = cueElements.length;
@@ -342,18 +471,18 @@ function PresentationControls() {
     const isClaimTakeover = isFoundationTakeover && nextCueElement?.classList.contains("foundation-space-claim");
     const isVisionTakeover = isFoundationTakeover && nextCueElement?.classList.contains("foundation-space-vision");
     const isProductsTakeover = isFoundationTakeover && nextCueElement?.classList.contains("foundation-space-products");
-    if (cinematicInputLocked.current) return;
-    if (isPresentation && !assetsReadyRef.current) return;
-
-    if (activeSceneId === "why" && currentCue === 1) {
-      cinematicInputLocked.current = true;
-      cueRef.current = cueCount;
-      setCue(cueRef.current);
-      window.setTimeout(() => { cinematicInputLocked.current = false; }, 1500);
-      return;
-    }
-
     if (activeSceneId === "roadmap" && currentCue === 1) {
+      if (roadmapProofInputLocked.current || (isPresentation && !assetsReadyRef.current)) return;
+      lockRoadmapProofInput();
+      if (roadmapProofRef.current === "idle") {
+        startRoadmapProductProof();
+        return;
+      }
+      if (roadmapProofRef.current === "playing") {
+        settleRoadmapProductProof();
+        return;
+      }
+
       const roadmap = document.getElementById("roadmap");
       cinematicInputLocked.current = true;
       roadmap?.classList.remove("roadmap-content-revealed");
@@ -362,12 +491,23 @@ function PresentationControls() {
       setCue(cueRef.current);
       if (roadmapRevealTimer.current) window.clearTimeout(roadmapRevealTimer.current);
       roadmapRevealTimer.current = window.setTimeout(() => {
-        roadmap?.classList.remove("roadmap-content-revealing");
+        roadmap?.classList.remove("roadmap-content-revealing", "roadmap-product-proof-settled");
         roadmap?.classList.add("roadmap-content-revealed");
+        roadmapProofRef.current = "idle";
         window.dispatchEvent(new Event("resize"));
         cinematicInputLocked.current = false;
         roadmapRevealTimer.current = null;
       }, 1100);
+      return;
+    }
+    if (cinematicInputLocked.current) return;
+    if (isPresentation && !assetsReadyRef.current) return;
+
+    if (activeSceneId === "why" && currentCue === 1) {
+      cinematicInputLocked.current = true;
+      cueRef.current = cueCount;
+      setCue(cueRef.current);
+      window.setTimeout(() => { cinematicInputLocked.current = false; }, 1500);
       return;
     }
 
@@ -434,6 +574,10 @@ function PresentationControls() {
   };
 
   const retreatCue = () => {
+    if (presentationScenes[active][0] === "roadmap" && roadmapProofRef.current !== "idle") {
+      resetRoadmapProductProof();
+      return;
+    }
     if (cinematicInputLocked.current) return;
     const currentCue = cueRef.current;
     if (currentCue > 1) {
@@ -648,11 +792,17 @@ function PresentationControls() {
       scene.dataset.signatureState = "idle";
       scene.classList.remove("signature-hold");
     });
-    document.getElementById("roadmap")?.classList.remove("roadmap-content-revealing", "roadmap-content-revealed");
+    document.getElementById("roadmap")?.classList.remove("roadmap-content-revealing", "roadmap-content-revealed", "roadmap-product-proof-playing", "roadmap-product-proof-settled", "roadmap-proof-returned");
     if (signatureLockTimer.current) window.clearTimeout(signatureLockTimer.current);
     if (roadmapRevealTimer.current) window.clearTimeout(roadmapRevealTimer.current);
+    if (roadmapProofTimer.current) window.clearTimeout(roadmapProofTimer.current);
+    if (roadmapProofInputTimer.current) window.clearTimeout(roadmapProofInputTimer.current);
     signatureLockTimer.current = null;
     roadmapRevealTimer.current = null;
+    roadmapProofTimer.current = null;
+    roadmapProofInputTimer.current = null;
+    roadmapProofInputLocked.current = false;
+    roadmapProofRef.current = "idle";
     if (!isPresentation || !assetsReady) return;
 
     const activeSceneId = presentationScenes[active][0];
@@ -673,8 +823,12 @@ function PresentationControls() {
     return () => {
       if (signatureLockTimer.current) window.clearTimeout(signatureLockTimer.current);
       if (roadmapRevealTimer.current) window.clearTimeout(roadmapRevealTimer.current);
+      if (roadmapProofTimer.current) window.clearTimeout(roadmapProofTimer.current);
+      if (roadmapProofInputTimer.current) window.clearTimeout(roadmapProofInputTimer.current);
       signatureLockTimer.current = null;
       roadmapRevealTimer.current = null;
+      roadmapProofTimer.current = null;
+      roadmapProofInputTimer.current = null;
     };
   }, [active, assetsReady, isPresentation]);
 
@@ -775,6 +929,10 @@ function PresentationControls() {
       if (!isPresentation && ["ArrowUp", "PageUp"].includes(event.key)) {
         event.preventDefault();
         goTo(Math.max(active - 1, 0));
+      }
+      if (isPresentation && ["ArrowUp", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        retreatCue();
       }
       if (!isPresentation && event.key === "Home") {
         event.preventDefault();
@@ -1342,6 +1500,7 @@ export default function Home() {
             </div>
             <div className="signature-rc-copy"><p>반복 명령은 프로그램이</p><p>검토와 판단은 사람이</p></div>
           </div>
+          <RoadmapProductProofSequence />
           <div className="grid gap-12 lg:grid-cols-[1.04fr_.96fr] lg:items-start">
             <div>
               <SectionKicker number="06" label="FROM CONNECTION TO INTELLIGENCE" />
@@ -1349,7 +1508,8 @@ export default function Home() {
                 <p data-cue className="roadmap-support-copy scene-support-copy mt-8 max-w-[540px] text-[17px] leading-8 text-[#456066]"><span className="block lg:whitespace-nowrap">RC-CAD와 전문 프로그램은 반복 입력·집계·양식 편차를 줄입니다.</span><span className="block lg:whitespace-nowrap">사람은 검토와 판단에 더 집중합니다.</span></p>
             </div>
             <div data-cue className="roadmap-draft relative min-h-[320px] overflow-hidden border border-[#101c2c]/15 bg-[#dfe5e0] lg:min-h-[370px]">
-              <ParallaxImage src={manusAsset("devlab-roadmap_a1fcd200.jpg")} alt="연결에서 표준화와 지능화로 이어지는 발전 과정" className="h-full w-full object-cover" intensity={1.1} />
+              <ParallaxImage src={productProofAssets.qcStudio} alt="CONCOST 기술본부 QC Studio의 프로젝트 등록과 검수 흐름" className="roadmap-qc-image h-full w-full object-cover object-top" intensity={.35} />
+              <span aria-hidden="true" className="roadmap-qc-privacy-mask" />
               <div aria-hidden="true" className="cad-draw-sequence"><i /><i /><i /><i /><i /></div>
               <div className="absolute inset-x-0 bottom-0 bg-[#f3f0e9]/95 p-5 backdrop-blur-sm sm:p-7">
                 <p className="font-display text-xl font-extrabold tracking-[-0.045em]">반복 명령은 프로그램이, 검토와 판단은 사람이.</p>
