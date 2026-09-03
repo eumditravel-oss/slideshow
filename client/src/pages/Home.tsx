@@ -148,9 +148,9 @@ const presentationScenes = [
   ["build", "협업"],
   ["work", "개선"],
   ["foundation", "기반"],
-  ["showcase", "성과"],
   ["roadmap", "표준화"],
   ["impact", "변화"],
+  ["showcase", "성과"],
   ["message", "마무리"],
   ["brand-end", "로고"],
 ];
@@ -1413,7 +1413,7 @@ export default function Home() {
           <div className="showcase-content relative z-[1] mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-12 lg:pr-44 lg:py-8">
             <div className="grid gap-5 border-b border-[#101c2c]/15 pb-5 lg:grid-cols-[.84fr_1.16fr] lg:items-end">
               <div>
-                <SectionKicker number="06" label="DIGITAL PRODUCTS & CLIENT WORK" />
+                <SectionKicker number="08" label="DIGITAL PRODUCTS & CLIENT WORK" />
                 <h2 id="showcase-title" className="font-display mt-4 text-[clamp(2.05rem,3.45vw,3.55rem)] font-extrabold leading-[1] tracking-[-0.07em]"><span className="block">우리가 만든 것은</span><span className="block whitespace-nowrap">업무 기반부터 <span className="cue-highlight-marker cue-color-sky">웹사이트까지.</span></span></h2>
               </div>
               <p data-cue className="scene-support-copy max-w-2xl text-[14px] leading-6 text-[#456066] sm:text-[15px]"><span className="block whitespace-nowrap">전문 지식과 실행 경험을 자체 플랫폼으로 서비스화합니다.</span><span className="block whitespace-nowrap">같은 개발 역량으로 고객사의 브랜 드 화면까지 구현합니다.</span></p>
@@ -1503,7 +1503,7 @@ export default function Home() {
           <RoadmapProductProofSequence />
           <div className="grid gap-12 lg:grid-cols-[1.04fr_.96fr] lg:items-start">
             <div>
-              <SectionKicker number="07" label="FROM CONNECTION TO INTELLIGENCE" />
+              <SectionKicker number="06" label="FROM CONNECTION TO INTELLIGENCE" />
               <h2 id="roadmap-title" className="font-display mt-7 text-[clamp(2.5rem,4.4vw,4.8rem)] font-extrabold leading-[.98] tracking-[-0.07em]">본업의 반복을 줄이고,<br /><span className="cue-highlight-marker cue-color-violet">표준을 만듭니다.</span></h2>
                 <p data-cue className="roadmap-support-copy scene-support-copy mt-8 max-w-[540px] text-[17px] leading-8 text-[#456066]"><span className="block lg:whitespace-nowrap">RC-CAD와 전문 프로그램은 반복 입력·집계·양식 편차를 줄입니다.</span><span className="block lg:whitespace-nowrap">사람은 검토와 판단에 더 집중합니다.</span></p>
             </div>
@@ -1535,7 +1535,7 @@ export default function Home() {
           <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 lg:px-12 lg:py-10">
             <div className="grid gap-6 lg:grid-cols-[.92fr_1.08fr] lg:items-end">
               <div>
-                <SectionKicker number="08" label="WHO BENEFITS" />
+                <SectionKicker number="07" label="WHO BENEFITS" />
                 <h2 id="impact-title" className="font-display mt-5 text-[clamp(2.25rem,3.85vw,4.15rem)] font-extrabold leading-[1.12] tracking-[-0.07em]">개발의 효과는<br /><span className="whitespace-nowrap"><span className="cue-underline safe-underline cue-color-rose inline-block text-[#008b8b]">모든 부서에</span> 나타납니다.</span></h2>
               </div>
               <p data-cue className="scene-support-copy min-w-0 max-w-none break-words text-[15px] leading-7 text-[#456066]"><span className="block">각 부서가 같은 맥락에서 일하고 필요한 정보를 빠르게 확인합니다.</span><span className="block">개발의 효과는 더 나은 결정으로 이어집니다.</span></p>
